@@ -32,7 +32,7 @@ $pre4_zuletzt = $daten[pre3_zuletzt];
 $pre3_zuletzt = $daten[pre2_zuletzt];
 $pre2_zuletzt = $daten[pre1_zuletzt];
 $pre1_zuletzt = $daten[zuletzt];
-$zuletzt = "$PHP_SELF";
+$zuletzt = "$_SERVER[PHP_SELF]";
 
 
 $senden_id = mysql_query("UPDATE stspy SET dauer_ende = '$dauer_ende', zuletzt = '$zuletzt', pre1_zuletzt = '$pre1_zuletzt',  pre2_zuletzt = '$pre2_zuletzt',  pre3_zuletzt = '$pre3_zuletzt',  pre4_zuletzt = '$pre4_zuletzt',  pre5_zuletzt = '$pre5_zuletzt',  pre6_zuletzt = '$pre6_zuletzt',  pre7_zuletzt = '$pre7_zuletzt',  pre8_zuletzt = '$pre8_zuletzt', pre9_zuletzt = '$pre9_zuletzt', pre10_zuletzt = '$pre10_zuletzt', pre11_zuletzt = '$pre11_zuletzt', pre12_zuletzt = '$pre12_zuletzt', pre13_zuletzt = '$pre13_zuletzt', pre14_zuletzt = '$pre14_zuletzt', pre15_zuletzt = '$pre15_zuletzt', pre16_zuletzt = '$pre16_zuletzt', pre17_zuletzt = '$pre17_zuletzt', pre18_zuletzt = '$pre18_zuletzt', pre19_zuletzt = '$pre19_zuletzt' WHERE ip = '$ip' AND browser = '$browser'");

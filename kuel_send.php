@@ -155,7 +155,7 @@ mail("ncc_1701@gmx.de", "KUEL", "$f_nick schreibt:\n$f_zug");
 
 
     <? else: ?>
-    Das Passwort war falsch. Es wurde kein Zug eingesandt.<br><br><a href="<?php echo $PHP_SELF; ?>">Zur&uuml;ck</a>
+    Das Passwort war falsch. Es wurde kein Zug eingesandt.<br><br><a href="<?php echo $_SERVER['PHP_SELF']; ?>">Zur&uuml;ck</a>
 
   <? endif ?>
 <? endif ?>

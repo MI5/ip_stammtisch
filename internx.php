@@ -604,7 +604,7 @@ $i = 0;
 while($daten = mysql_fetch_array($abfrage_id))
 {
 
-  if ($daten[pagename] != "$PHP_SELF")
+  if ($daten[pagename] != "$_SERVER[PHP_SELF]")
   {
     $i += $daten[anzahl];
   }

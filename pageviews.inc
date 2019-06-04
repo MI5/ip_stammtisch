@@ -4,7 +4,7 @@ include("vars.inc.php");
 $link = mysql_connect($sql_server,$sql_user,$sql_pass);
 mysql_select_db($sql_db);
 
-$pagename = "$PHP_SELF";
+$pagename = "$_SERVER[PHP_SELF]";
 
 $abfrage_id = mysql_query("SELECT anzahl FROM stpageviews WHERE pagename = '$pagename'");
 

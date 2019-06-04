@@ -1273,7 +1273,7 @@ else
 
 
     <h4>Schritt 3 - Karte:</h4>
-    <form enctype="multipart/form-data" action="<?php echo $PHP_SELF; ?>" method="post">
+    <form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <form action="intern.php" method="post">
     <input type="hidden" name="f_nick" value="<?=$f_nick?>">
     <input type="hidden" name="f_pw" value="<?=$f_pw?>">

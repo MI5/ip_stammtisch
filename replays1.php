@@ -112,7 +112,7 @@ if ($thefile_size == "0")
   echo "Das ist kein gültiger Pfad zu einer Datei!<br><br>";
 ?>
 
-<form enctype="multipart/form-data" action="<?php echo $PHP_SELF; ?>" method="post">
+<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 Datei: <input name="thefile" type="file">
 <br><br>Beschreibung:<br>
 <textarea name="f_beschreibung" rows="4" cols="40" wrap="physical"></textarea><br><br>
