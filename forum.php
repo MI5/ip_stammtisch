@@ -25,7 +25,7 @@ $dauer_start = time();
 
 $abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
 {
@@ -88,13 +88,13 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
     if ($f_intern == "1")
     {
       $abfrage_id = $mysqli->query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
-      while($datenXX = mysql_fetch_array($abfrage_id))
+      while($datenXX = $abfrage_id->fetch_array())
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
           mail("$datenXX[wl]", "Neuigkeiten vom Stammtisch", "Neuer Forenbeitrag von $f_name:\n\nIntern: Ja\n\n-- $f_topic --\n\n$f_beitrag\n\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
       }
       $abfrage_id = $mysqli->query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
-      while($datenXX = mysql_fetch_array($abfrage_id))
+      while($datenXX = $abfrage_id->fetch_array())
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
           ; //mail("$datenXX[icq]@pager.icq.com", "Stammtisch", "Neuer Forenbeitrag");
@@ -103,13 +103,13 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
     else
     {
       $abfrage_id = $mysqli->query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
-      while($datenXX = mysql_fetch_array($abfrage_id))
+      while($datenXX = $abfrage_id->fetch_array())
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
           mail("$datenXX[wl]", "Neuigkeiten vom Stammtisch", "Neuer Forenbeitrag von $f_name:\n\nIntern: Nein\n\n-- $f_topic --\n\n$f_beitrag\n\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
       }
       $abfrage_id = $mysqli->query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
-      while($datenXX = mysql_fetch_array($abfrage_id))
+      while($datenXX = $abfrage_id->fetch_array())
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
           mail("$datenXX[icq]@pager.icq.com", "Stammtisch", "Neuer Forenbeitrag");
@@ -122,7 +122,7 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
 
     $abfrage_id = $mysqli->query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
-    $daten = mysql_fetch_array($abfrage_id);
+    $daten = $abfrage_id->fetch_array();
 
     if ($daten[user] != "")
     {
@@ -163,7 +163,7 @@ if (isset($b))
     $browser = getenv("HTTP_USER_AGENT");
 
     $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-    $daten_user = mysql_fetch_array($abfrage_id);
+    $daten_user = $abfrage_id->fetch_array();
 
     echo "<h1 style=\"color:red;\">Forum musste traurigerweise auf Grund von Spamrobotern deaktiviert werden.</h1>";
     echo "  <td>Name:</td><td><input name=\"f_name\" value=\"$daten_user[user]\" size=\"30\" maxlength=\"30\"></td>";
@@ -196,7 +196,7 @@ if (isset($b))
   else
   {
     $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch WHERE id = $b");
-    $daten = mysql_fetch_array($abfrage_id);
+    $daten = $abfrage_id->fetch_array();
 
     if ($daten[intern] == 1)
     {
@@ -211,7 +211,7 @@ if (isset($b))
 
         <select name="f_nick">
         <?
-        while($daten_li = mysql_fetch_array($abfrage_id))
+        while($daten_li = $abfrage_id->fetch_array())
         {
           echo "<option value=\"$daten_li[nick]\">$daten_li[prefix].$daten_li[nick]</option>";
         }
@@ -235,7 +235,7 @@ if (isset($b))
 
         $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 1");
 
-        if ($daten_pw_ = mysql_fetch_array($abfrage_id))
+        if ($daten_pw_ = $abfrage_id->fetch_array())
         {
           $timex = time();
           $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
@@ -260,7 +260,7 @@ if (isset($b))
       {
         $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
-        if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != ""))
+        if (($daten_li = $abfrage_id->fetch_array()) && ($f_pw != ""))
         {
           $pw = "critterblasen";
 
@@ -270,7 +270,7 @@ if (isset($b))
           $browser = getenv("HTTP_USER_AGENT");
 
           $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-          $daten_s = mysql_fetch_array($abfrage_id);
+          $daten_s = $abfrage_id->fetch_array();
 
           if ($daten_s[user] == "")
             $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
@@ -283,7 +283,7 @@ if (isset($b))
 
           $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
-          if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten_li['option_autoli'] == 1))
+          if (!($daten_pw_ = $abfrage_id->fetch_array()) && ($daten_li['option_autoli'] == 1))
           {
             $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten_li[prefix]','$daten_li[nick]','$daten_li[pw]','$timex','$ip','$daten_li[typ]')");
           }
@@ -352,7 +352,7 @@ if (isset($b))
 <table width="80%">
 <?
 $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch ORDER BY datum DESC LIMIT 40");
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   $style = "";
   if (isset($b))

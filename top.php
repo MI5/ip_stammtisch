@@ -8,7 +8,7 @@ $cookie_inhalt = getenv("HTTP_COOKIE");
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT cookie_inhalt FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 if ($cookie_inhalt != $daten[cookie_inhalt])
 {
@@ -18,7 +18,7 @@ if ($cookie_inhalt != $daten[cookie_inhalt])
 
 
   $abfrage_id = $mysqli->query("SELECT tilesetcount FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-  $daten = mysql_fetch_array($abfrage_id);
+  $daten = $abfrage_id->fetch_array();
 
   if (!isset($daten[tilesetcount]))
   {

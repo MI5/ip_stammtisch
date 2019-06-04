@@ -35,7 +35,7 @@ selectbg();
 
     $abfrage_id = $mysqli->query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
-    $daten = mysql_fetch_array($abfrage_id);
+    $daten = $abfrage_id->fetch_array();
 
     if ($daten[user] != "")
     {

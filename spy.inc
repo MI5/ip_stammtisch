@@ -9,7 +9,7 @@ $dauer_ende = time();
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT zuletzt,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,pre10_zuletzt,pre11_zuletzt,pre12_zuletzt,pre13_zuletzt,pre14_zuletzt,pre15_zuletzt,pre16_zuletzt,pre17_zuletzt,pre18_zuletzt FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 
 $pre19_zuletzt = $daten[pre18_zuletzt];
@@ -38,7 +38,7 @@ $senden_id = $mysqli->query("UPDATE stspy SET dauer_ende = '$dauer_ende', zuletz
 
 
 $abfrage_id = $mysqli->query("SELECT count FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 if (!isset($daten[count]))
 {

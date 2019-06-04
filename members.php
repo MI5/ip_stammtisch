@@ -48,7 +48,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT prefix,nick,name,status,since,location,email,icq,option_icqshow FROM stmembers WHERE typ >= 1 ORDER BY nick");
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   echo "<tr>";
   echo "<td>$daten[prefix].$daten[nick]";
@@ -110,7 +110,7 @@ Onkel.Roland<br>
 <?
 $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ = -1 ORDER BY datum");
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   echo "$daten[prefix].$daten[nick]<br>";
 }
@@ -122,7 +122,7 @@ while($daten = mysql_fetch_array($abfrage_id))
 <?
 $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ = 0 ORDER BY nick");
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   echo "$daten[prefix].$daten[nick]<br>";
 }

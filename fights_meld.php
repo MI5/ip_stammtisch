@@ -38,7 +38,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
-if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
+if (($daten_li = $abfrage_id->fetch_array()) && ($f_pw != "")):?>
 
 <?
   /* Spionage Anfang */
@@ -47,7 +47,7 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
   $browser = getenv("HTTP_USER_AGENT");
 
   $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-  $daten_s = mysql_fetch_array($abfrage_id);
+  $daten_s = $abfrage_id->fetch_array();
 
   if ($daten_s[user] == "")
     $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
@@ -61,7 +61,7 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
 
           $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
-          if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten_li[option_autoli] == 1))
+          if (!($daten_pw_ = $abfrage_id->fetch_array()) && ($daten_li[option_autoli] == 1))
           {
             $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten_li[prefix]','$daten_li[nick]','$daten_li[pw]','$timex','$ip','$daten_li[typ]')");
           }
@@ -90,7 +90,7 @@ Es fehlt ein Eintrag? &Auml;ndere doch einfach den <a href ="changesrc.php?key=a
 <select name="f_we[]" multiple size="5">
 
 <?
-  while($daten_ch = mysql_fetch_array($abfrage_id))
+  while($daten_ch = $abfrage_id->fetch_array())
   {
     if ($daten_ch[id] == "2")
       echo "<option selected value=\"$daten_ch[prefix].$daten_ch[nick]\">$daten_ch[prefix].$daten_ch[nick]</option>\n";
@@ -107,7 +107,7 @@ Es fehlt ein Eintrag? &Auml;ndere doch einfach den <a href ="changesrc.php?key=a
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT id,datum,source,changedby FROM stsource WHERE id = 1");
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 echo "$daten[source]";
 
@@ -141,7 +141,7 @@ $mysqli->close();
 
     <select name="f_nick">
     <?
-    while($daten_li = mysql_fetch_array($abfrage_id))
+    while($daten_li = $abfrage_id->fetch_array())
     {
       echo "<option value=\"$daten_li[nick]\">$daten_li[prefix].$daten_li[nick]</option>";
     }
@@ -164,7 +164,7 @@ $mysqli->close();
 
         $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 1");
 
-        if ($daten_pw_ = mysql_fetch_array($abfrage_id))
+        if ($daten_pw_ = $abfrage_id->fetch_array())
         {
           $timex = time();
           $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");

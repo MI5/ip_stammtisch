@@ -53,7 +53,7 @@ $abfrage_id = $mysqli->query("SELECT id,vs,map,modus,result FROM stfights ORDER 
 
 $gesamt = 0;
 $siege = 0;
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   $gesamt++;
   if ($daten[result] == "Sieg")

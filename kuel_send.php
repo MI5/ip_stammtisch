@@ -36,7 +36,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
-if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
+if (($daten = $abfrage_id->fetch_array()) && ($f_pw != "")): ?>
 
 
 <?
@@ -46,7 +46,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
   $browser = getenv("HTTP_USER_AGENT");
 
   $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-  $daten_s = mysql_fetch_array($abfrage_id);
+  $daten_s = $abfrage_id->fetch_array();
 
   if ($daten_s[user] == "")
     $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten[prefix].$daten[nick]' WHERE ip = '$ip' AND browser = '$browser'");
@@ -56,7 +56,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 /* Spionage2 Anfang */
 
   $abfrage_id = $mysqli->query("SELECT visits FROM stmembers WHERE id = '$daten[id]'");
-  $daten_s = mysql_fetch_array($abfrage_id);
+  $daten_s = $abfrage_id->fetch_array();
 
   $anzahl = $daten_s[visits];
   $anzahl++;
@@ -71,7 +71,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
           $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
-          if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten[option_autoli] == 1))
+          if (!($daten_pw_ = $abfrage_id->fetch_array()) && ($daten[option_autoli] == 1))
           {
             $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten[prefix]','$daten[nick]','$daten[pw]','$timex','$ip','$daten[typ]')");
           }
@@ -103,7 +103,7 @@ mail("ncc_1701@gmx.de", "KUEL", "$f_nick schreibt:\n$f_zug");
 
     <select name="f_nick">
     <?
-    while($daten = mysql_fetch_array($abfrage_id))
+    while($daten = $abfrage_id->fetch_array())
     {
       echo "<option value=\"$daten[nick]\">$daten[prefix].$daten[nick]</option>";
     }
@@ -127,7 +127,7 @@ mail("ncc_1701@gmx.de", "KUEL", "$f_nick schreibt:\n$f_zug");
 
         $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 0");
 
-        if ($daten_pw_ = mysql_fetch_array($abfrage_id))
+        if ($daten_pw_ = $abfrage_id->fetch_array())
         {
           $timex = time();
           $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");

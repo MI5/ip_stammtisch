@@ -70,7 +70,7 @@ if (isset($aktion))
   {
     $abfrage_id = $mysqli->query("SELECT id,ip,datum FROM stspy ORDER BY dauer_ende DESC LIMIT 10,10000");
 
-    while($daten = mysql_fetch_array($abfrage_id))
+    while($daten = $abfrage_id->fetch_array())
     {
       if (!stristr("$daten[ip]","x"))
       {
@@ -97,7 +97,7 @@ if (isset($aktion))
   if ($aktion == "user_l")
   {
     $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE id = '$f_id'");
-    $datenT = mysql_fetch_array($abfrage_id);
+    $datenT = $abfrage_id->fetch_array();
 
     echo "<form action=\"internx.php?ident=$ident&sortby=$sortby&direction=$direction&mich=$mich&detail=$detail&rows=$rows\" method=\"post\">";
     echo "User setzen von ID Nr. $f_id: <input name=\"f_user\" value=\"$datenT[user]\" maxlength=\"30\" size=\"20\">&nbsp;";
@@ -309,7 +309,7 @@ else
 
 
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   if ($mich == "no")
   {
@@ -600,7 +600,7 @@ $abfrage_id = $mysqli->query("SELECT id,datum,pagename,anzahl FROM stpageviews")
 
 $i = 0;
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
 
   if ($daten[pagename] != "$_SERVER[PHP_SELF]")
@@ -623,7 +623,7 @@ $abfrage_id = $mysqli->query("SELECT id,datum,pagename,anzahl FROM stpageviews")
 
 </tr>
 <?
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   $d = (string) $daten[datum];
   echo "<tr>";

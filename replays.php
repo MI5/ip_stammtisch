@@ -35,7 +35,7 @@ $abfrage_id = $mysqli->query("SELECT id, datum, uploaded_by, name, size, beschre
 $mysqli->close();
 
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   $d = $daten[datum];
   echo "<table border=\"2\" cellspacing=\"0\" width=\"50%\">";

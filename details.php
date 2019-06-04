@@ -24,7 +24,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = $mysqli->query("SELECT id,datum,we,them,result FROM stfights where id = '$id'");
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 $d = (string) $daten[datum];
 echo "<b>Austragungsdatum:</b> $d[6]$d[7].$d[4]$d[5].$d[2]$d[3]<br><br>";

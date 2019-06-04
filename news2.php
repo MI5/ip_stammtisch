@@ -28,13 +28,13 @@ selectbg();
 
 
     $abfrage_id = $mysqli->query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
-    while($datenXX = mysql_fetch_array($abfrage_id))
+    while($datenXX = $abfrage_id->fetch_array())
     {
       if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
         mail("$datenXX[wl]", "Neuigkeiten vom Stammtisch", "Neue News eingeliefert von $f_name:\n\n-- $f_topic --\n\n$f_beitrag\n\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
     }
     $abfrage_id = $mysqli->query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
-    while($datenXX = mysql_fetch_array($abfrage_id))
+    while($datenXX = $abfrage_id->fetch_array())
     {
       if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
         mail("$datenXX[icq]@pager.icq.com", "Stammtisch", "Neue News eingeliefert");
@@ -47,7 +47,7 @@ selectbg();
 
     $abfrage_id = $mysqli->query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
-    $daten = mysql_fetch_array($abfrage_id);
+    $daten = $abfrage_id->fetch_array();
 
     if ($daten[user] != "")
     {

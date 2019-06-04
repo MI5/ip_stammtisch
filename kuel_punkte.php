@@ -48,7 +48,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,points FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY points DESC,Nick ASC");
 $i = 1;
-while($datenXX = mysql_fetch_array($abfrage_id))
+while($datenXX = $abfrage_id->fetch_array())
 {
   echo "<tr><td>$i</td><td>$datenXX[prefix].$datenXX[nick]</td><td><a href=\"javascript:open__window('$datenXX[id]')\">show</a></td><td>$datenXX[points]</td></tr>";
   $i++;
@@ -62,7 +62,7 @@ while($datenXX = mysql_fetch_array($abfrage_id))
 </div>
 <?
 $abfrage_id = $mysqli->query("SELECT * FROM stkuel ORDER BY id DESC");
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 echo "<h2>Wir befinden uns in der $daten[woche]</h2>";
 echo "DAX-Kurs: $daten[dax]<br>";

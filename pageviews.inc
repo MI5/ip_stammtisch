@@ -7,7 +7,7 @@ $pagename = "$_SERVER[PHP_SELF]";
 
 $abfrage_id = $mysqli->query("SELECT anzahl FROM stpageviews WHERE pagename = '$pagename'");
 
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 
 if (!isset($daten[anzahl]))

@@ -34,7 +34,7 @@ else
   $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
   $abfrage_id = $mysqli->query("SELECT clipboard FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
-  $daten = mysql_fetch_array($abfrage_id);
+  $daten = $abfrage_id->fetch_array();
 
 
   if ($daten[clipboard] == "")
@@ -79,7 +79,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
-$daten = mysql_fetch_array($abfrage_id);
+$daten = $abfrage_id->fetch_array();
 
 if (($dauer_start - $daten['dauer_ende'] - 7200) > 0)
 {
@@ -145,7 +145,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT name,topic,datum,beitrag FROM stnews ORDER BY datum DESC LIMIT 8");
 
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   $d = (string) $daten[datum];
 

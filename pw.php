@@ -26,7 +26,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = $mysqli->query("SELECT name,pw FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND wl = '$f_email'");
 
-if (($daten = mysql_fetch_array($abfrage_id)) && ($f_email != ""))
+if (($daten = $abfrage_id->fetch_array()) && ($f_email != ""))
 {
   mail("$f_email", "eMail vom Stammtisch", "Hallo $daten[name]!\n\nDu hast das Passwort für den internen Bereich der Stammtisch-Webseite angefordert\n\nDein Passwort lautet \"$daten[pw]\".\n\nOnkel.MI5\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
   echo "Identifikation Erfolgreich! An die angegebene Adresse wurde eine eMail mit dem Passwort versandt.";
@@ -49,7 +49,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = $mysqli->query("SELECT prefix,nick,email FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
 
 echo "<form action=\"pw.php\" method=\"post\">Ich bin <select name=\"f_nick\">";
-while($daten = mysql_fetch_array($abfrage_id))
+while($daten = $abfrage_id->fetch_array())
 {
   echo "<option value=\"$daten[nick]\">$daten[prefix].$daten[nick]</option>";
 }

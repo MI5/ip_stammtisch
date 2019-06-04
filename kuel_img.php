@@ -23,7 +23,7 @@ if (isset($id))
   $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
   $abfrage_id = $mysqli->query("SELECT prefix,nick,format FROM stmembers WHERE id = '$id'");
-  $datenXX = mysql_fetch_array($abfrage_id);
+  $datenXX = $abfrage_id->fetch_array();
   echo "<img src=\"$datenXX[format]\">";
 
 
