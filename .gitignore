@@ -1,0 +1,20 @@
+# IDEs and editors
+/.idea
+.project
+.classpath
+*.launch
+
+# IDE - VSCode
+.vscode/*
+.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# System Files
+.DS_Store
+Thumbs.db
+mindsphere/*
+
+# Do not commit by accident
+vars.inc.php
