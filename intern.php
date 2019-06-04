@@ -43,7 +43,7 @@ selectbg();
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 
-$abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
+$abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
 if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
@@ -54,22 +54,22 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
   $ip = getenv("REMOTE_ADDR");
   $browser = getenv("HTTP_USER_AGENT");
 
-  $abfrage_id = mysql_query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+  $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
   $daten_s = mysql_fetch_array($abfrage_id);
 
   if ($daten_s['user'] == "")
-    $senden_id = mysql_query("UPDATE stspy SET user = '$daten[prefix].$daten[nick]' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten[prefix].$daten[nick]' WHERE ip = '$ip' AND browser = '$browser'");
 
 /* Spionage Ende */
 
 /* Spionage2 Anfang */
 
-  $abfrage_id = mysql_query("SELECT visits FROM stmembers WHERE id = '$daten[id]'");
+  $abfrage_id = $mysqli->query("SELECT visits FROM stmembers WHERE id = '$daten[id]'");
   $daten_s = mysql_fetch_array($abfrage_id);
 
   $anzahl = $daten_s['visits'];
   $anzahl++;
-  $senden_id = mysql_query("UPDATE stmembers SET visits = '$anzahl' WHERE id = '$daten[id]'");
+  $senden_id = $mysqli->query("UPDATE stmembers SET visits = '$anzahl' WHERE id = '$daten[id]'");
 /* Spionage2 Ende */
 
 
@@ -78,11 +78,11 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
           $ip = getenv("REMOTE_ADDR");
           $timex = time();
 
-          $abfrage_id = mysql_query("SELECT id FROM stonline WHERE ip = '$ip'");
+          $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
           if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten['option_autoli'] == 1))
           {
-            $senden_id = mysql_query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten[prefix]','$daten[nick]','$daten[pw]','$timex','$ip','$daten[typ]')");
+            $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten[prefix]','$daten[nick]','$daten[pw]','$timex','$ip','$daten[typ]')");
           }
 
           /* Login Ende 2*/
@@ -124,12 +124,12 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
       }
       if ($f_icq == "")
       {
-        $senden_id = mysql_query("UPDATE stmembers SET option_icqshow = 0 WHERE id = $f_id");
-        $senden_id = mysql_query("UPDATE stmembers SET option_icqsend = 0 WHERE id = $f_id");
+        $senden_id = $mysqli->query("UPDATE stmembers SET option_icqshow = 0 WHERE id = $f_id");
+        $senden_id = $mysqli->query("UPDATE stmembers SET option_icqsend = 0 WHERE id = $f_id");
       }
-      $senden_id = mysql_query("UPDATE stmembers SET prefix = '$f_prefix', icq = '$f_icq', email = '$f_email', wl ='$f_wl' WHERE id = $f_id");
+      $senden_id = $mysqli->query("UPDATE stmembers SET prefix = '$f_prefix', icq = '$f_icq', email = '$f_email', wl ='$f_wl' WHERE id = $f_id");
 
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -141,10 +141,10 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
       {
         $ip = getenv("REMOTE_ADDR");
 
-        $abfrage_id = mysql_query("SELECT id FROM stonline WHERE ip = '$ip'");
+        $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
         if ($daten_check = mysql_fetch_array($abfrage_id))
         {
-          $loeschen_id = mysql_query("DELETE FROM stonline WHERE ip = '$ip'");
+          $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE ip = '$ip'");
           echo "Ausgeloggt!<br><br>";
         }
         else
@@ -158,52 +158,52 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
         if ($f_option_icqshow == 1)
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_icqshow = '$f_option_icqshow' WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_icqshow = '$f_option_icqshow' WHERE id = $f_id");
         }
         else
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_icqshow = 0 WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_icqshow = 0 WHERE id = $f_id");
         }
 
         if ($f_option_icqsend == 1)
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_icqsend = '$f_option_icqsend' WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_icqsend = '$f_option_icqsend' WHERE id = $f_id");
         }
         else
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_icqsend = 0 WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_icqsend = 0 WHERE id = $f_id");
         }
 
         if ($f_option_mailsend == 1)
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_mailsend = '$f_option_mailsend' WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_mailsend = '$f_option_mailsend' WHERE id = $f_id");
         }
         else
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_mailsend = 0 WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_mailsend = 0 WHERE id = $f_id");
         }
 
         if ($f_option_notself == 1)
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_notself = '$f_option_notself' WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_notself = '$f_option_notself' WHERE id = $f_id");
         }
         else
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_notself = 0 WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_notself = 0 WHERE id = $f_id");
         }
 
         if ($f_option_autoli == 1)
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_autoli = '$f_option_autoli' WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_autoli = '$f_option_autoli' WHERE id = $f_id");
         }
         else
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_autoli = 0 WHERE id = $f_id");
-          $loeschen_id = mysql_query("DELETE FROM stonline WHERE ip = '$ip'");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_autoli = 0 WHERE id = $f_id");
+          $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE ip = '$ip'");
         }
 
       }
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -222,16 +222,16 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
         if ($f_option_kuel == 1)
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_kuel = '$f_option_kuel' WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_kuel = '$f_option_kuel' WHERE id = $f_id");
         }
         else
         {
-          $senden_id = mysql_query("UPDATE stmembers SET option_kuel = 0 WHERE id = $f_id");
+          $senden_id = $mysqli->query("UPDATE stmembers SET option_kuel = 0 WHERE id = $f_id");
         }
 
-        $senden_id = mysql_query("UPDATE stmembers SET format = '$f_format' WHERE id = $f_id");
+        $senden_id = $mysqli->query("UPDATE stmembers SET format = '$f_format' WHERE id = $f_id");
 
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
         $daten = mysql_fetch_array($abfrage_id);
         echo "<br><br>";
       }
@@ -247,16 +247,16 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
       else
       {
         echo "Passwort wurde ge&auml;ndert<br><br>";
-        $senden_id = mysql_query("UPDATE stmembers SET pw = '$f_passw1' WHERE id = $f_id");
+        $senden_id = $mysqli->query("UPDATE stmembers SET pw = '$f_passw1' WHERE id = $f_id");
         $f_pw = "$f_passw1";
 
         // Sicherheits-Ausloggen - Anfang (sonst ist das alte Passwort noch in 'stonline')
         $ip = getenv("REMOTE_ADDR");
-        $loeschen_id = mysql_query("DELETE FROM stonline WHERE ip = '$ip'");
+        $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE ip = '$ip'");
         echo "Ein Sicherheits-Logout wurde zudem ausgeführt.<br><br>";
         // Sicherheits-Ausloggen - Ende
 
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
         $daten = mysql_fetch_array($abfrage_id);
       }
       echo "<br><br>";
@@ -265,7 +265,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
     if ($f_action == "F4")
     {
-        $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch WHERE id = '$f_id_beitrag'");
+        $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch WHERE id = '$f_id_beitrag'");
         $daten3 = mysql_fetch_array($abfrage_id);
         echo "&Auml;ndern des Forenbeitrags ";
         if ($daten3['intern'] == 1)
@@ -309,7 +309,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
     if ($f_action == "F4_KUEL")
     {
-        $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email FROM stammtisch2 WHERE id = '$f_id_beitrag'");
+        $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email FROM stammtisch2 WHERE id = '$f_id_beitrag'");
         $daten3 = mysql_fetch_array($abfrage_id);
         echo "&Auml;ndern des Forenbeitrags ";
         echo "\"$daten3[topic]\" von $daten3[name]:";
@@ -351,7 +351,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
     if ($f_action == "F4a")
     {
-        $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag FROM stnews WHERE id = '$f_id_beitrag'");
+        $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag FROM stnews WHERE id = '$f_id_beitrag'");
         $daten3 = mysql_fetch_array($abfrage_id);
         echo "&Auml;ndern der News \"$daten3[topic]\" von $daten3[name]:";
 
@@ -391,16 +391,16 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
     {
         if ($f_beitrag == "")
         {
-          $loeschen_id = mysql_query("DELETE FROM stammtisch WHERE id = '$f_id_beitrag'");
+          $loeschen_id = $mysqli->query("DELETE FROM stammtisch WHERE id = '$f_id_beitrag'");
 
           echo "Forenbeitrag wurde gel&ouml;scht!";
         }
         else
         {
-          $abfrage_id = mysql_query("SELECT datum FROM stammtisch WHERE id = '$f_id_beitrag'");
+          $abfrage_id = $mysqli->query("SELECT datum FROM stammtisch WHERE id = '$f_id_beitrag'");
           $datenT = mysql_fetch_array($abfrage_id);
 
-          $senden_id = mysql_query("UPDATE stammtisch SET beitrag = '$f_beitrag',datum = '$datenT[datum]',topic = '$f_topic',intern = '$f_intern',name = '$f_name' WHERE id = $f_id_beitrag");
+          $senden_id = $mysqli->query("UPDATE stammtisch SET beitrag = '$f_beitrag',datum = '$datenT[datum]',topic = '$f_topic',intern = '$f_intern',name = '$f_name' WHERE id = $f_id_beitrag");
 
           echo "Forenbeitrag wurde &uuml;berarbeitet!";
         }
@@ -413,16 +413,16 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
     {
         if ($f_beitrag == "")
         {
-          $loeschen_id = mysql_query("DELETE FROM stammtisch2 WHERE id = '$f_id_beitrag'");
+          $loeschen_id = $mysqli->query("DELETE FROM stammtisch2 WHERE id = '$f_id_beitrag'");
 
           echo "Forenbeitrag wurde gel&ouml;scht!";
         }
         else
         {
-          $abfrage_id = mysql_query("SELECT datum FROM stammtisch2 WHERE id = '$f_id_beitrag'");
+          $abfrage_id = $mysqli->query("SELECT datum FROM stammtisch2 WHERE id = '$f_id_beitrag'");
           $datenT = mysql_fetch_array($abfrage_id);
 
-          $senden_id = mysql_query("UPDATE stammtisch2 SET beitrag = '$f_beitrag',datum = '$datenT[datum]',topic = '$f_topic',name = '$f_name' WHERE id = $f_id_beitrag");
+          $senden_id = $mysqli->query("UPDATE stammtisch2 SET beitrag = '$f_beitrag',datum = '$datenT[datum]',topic = '$f_topic',name = '$f_name' WHERE id = $f_id_beitrag");
 
           echo "Forenbeitrag wurde &uuml;berarbeitet!";
         }
@@ -435,16 +435,16 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
     {
         if ($f_beitrag == "")
         {
-          $abfrage_id = mysql_query("DELETE FROM stnews WHERE id = '$f_id_beitrag'");
+          $abfrage_id = $mysqli->query("DELETE FROM stnews WHERE id = '$f_id_beitrag'");
 
           echo "News wurde gel&ouml;scht!";
         }
         else
         {
-          $abfrage_id = mysql_query("SELECT datum FROM stnews WHERE id = '$f_id_beitrag'");
+          $abfrage_id = $mysqli->query("SELECT datum FROM stnews WHERE id = '$f_id_beitrag'");
           $datenT = mysql_fetch_array($abfrage_id);
 
-          $senden_id = mysql_query("UPDATE stnews SET beitrag = '$f_beitrag',datum = '$datenT[datum]',topic = '$f_topic',name = '$f_name' WHERE id = $f_id_beitrag");
+          $senden_id = $mysqli->query("UPDATE stnews SET beitrag = '$f_beitrag',datum = '$datenT[datum]',topic = '$f_topic',name = '$f_name' WHERE id = $f_id_beitrag");
 
           echo "News wurde &uuml;berarbeitet!";
         }
@@ -470,9 +470,9 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         $sinceN = time();
         $sinceS = date("m/Y",$sinceN);
 
-        $senden_id = mysql_query("UPDATE stmembers SET status = '$f_status', typ = '$f_typ', prefix = 'Onkel', since = '$sinceS' WHERE id = $f_id_user");
+        $senden_id = $mysqli->query("UPDATE stmembers SET status = '$f_status', typ = '$f_typ', prefix = 'Onkel', since = '$sinceS' WHERE id = $f_id_user");
 
-        $abfrage_id = mysql_query("SELECT name,wl FROM stmembers WHERE id = $f_id_user");
+        $abfrage_id = $mysqli->query("SELECT name,wl FROM stmembers WHERE id = $f_id_user");
         $datenTT = mysql_fetch_array($abfrage_id);
 
         if ($datenTT['wl'] == "")
@@ -495,15 +495,15 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         if ($f_nick_new != "")
         {
           echo "Mitglied wurde aktualisiert<br><br>";
-          $senden_id = mysql_query("UPDATE stmembers SET status = '$f_status', typ = '$f_typ', prefix = '$f_prefix_vorher', nick = '$f_nick_new' WHERE id = $f_id_user");
+          $senden_id = $mysqli->query("UPDATE stmembers SET status = '$f_status', typ = '$f_typ', prefix = '$f_prefix_vorher', nick = '$f_nick_new' WHERE id = $f_id_user");
 
           // Sicherheits-Ausloggen - Anfang (falls der eigene Nick geändert wurde)
           $ip = getenv("REMOTE_ADDR");
 
-          $abfrage_id = mysql_query("SELECT id FROM stonline WHERE ip = '$ip'");
+          $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
           if ($daten_check = mysql_fetch_array($abfrage_id))
           {
-            $loeschen_id = mysql_query("DELETE FROM stonline WHERE ip = '$ip'");
+            $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE ip = '$ip'");
             echo "Ein Sicherheits-Logout wurde zudem ausgeführt.<br><br>";
           }
           // Sicherheits-Ausloggen - Ende
@@ -513,7 +513,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
           echo "Irgendwie muss er ja heißen, oder?";
       }
 
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -535,7 +535,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
           mail("$f_new_email", "eMail vom Stammtisch", "Hallo $f_new_name!\n\nDu bist soeben Probemember des Stammtisches geworden. Wenn du Fragen dazu hast, dann antworte auf diese automatisch generierte eMail.\n\nDein Passwort für den internen Bereich lautet \"probe\". Am besten änderst du es gleich im internen Bereich der Homepage ab.\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
           mail("ncc_1701@gmx.de", "eMail vom Stammtisch", "Hallo $f_new_name!\n\nDu bist soeben Probemember des Stammtisches geworden. Wenn du Fragen dazu hast, dann antworte auf diese automatisch generierte eMail.\n\nDein Passwort für den internen Bereich lautet \"probe\". Am besten änderst du es gleich im internen Bereich der Homepage ab.\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
         }
-        $senden_id = mysql_query("INSERT INTO stmembers (prefix, nick, name, location, wl, pw, typ, option_icqshow, option_icqsend, option_mailsend, option_notself, visits, option_kuel, option_autoli, points) VALUES ('Kumpel','$f_new_nick', '$f_new_name', '$f_new_ort', '$f_new_email', 'probe', 0, 0, 0, 0, 0, 0, 0, 1, 0)");
+        $senden_id = $mysqli->query("INSERT INTO stmembers (prefix, nick, name, location, wl, pw, typ, option_icqshow, option_icqsend, option_mailsend, option_notself, visits, option_kuel, option_autoli, points) VALUES ('Kumpel','$f_new_nick', '$f_new_name', '$f_new_ort', '$f_new_email', 'probe', 0, 0, 0, 0, 0, 0, 0, 1, 0)");
       }
       else
       {
@@ -543,7 +543,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
       }
 
 
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -555,10 +555,10 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
       for ($ki=0;$ki<count($f_newPoints);$ki++)
       {
         $newPoints[$ki] = $f_oldPoints[$ki] + $f_newPoints[$ki];
-        $senden_id = mysql_query("UPDATE stmembers SET points = '$newPoints[$ki]' WHERE id = $f_id_user[$ki]");
+        $senden_id = $mysqli->query("UPDATE stmembers SET points = '$newPoints[$ki]' WHERE id = $f_id_user[$ki]");
       }
 
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -566,9 +566,9 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
     if ($f_action == "F12")
     {
       echo "Kueldaten wurden aktualisiert<br><br>";
-      $senden_id = mysql_query("INSERT INTO stkuel (woche,dax,euro,lotto1,lotto2,lotto3,lotto4,lotto5,lotto6,krieg,wirtschaft,text) VALUES ('$woche','$dax','$euro','$l1','$l2','$l3','$l4','$l5','$l6','$krieg','$wirtschaft','$text')");
+      $senden_id = $mysqli->query("INSERT INTO stkuel (woche,dax,euro,lotto1,lotto2,lotto3,lotto4,lotto5,lotto6,krieg,wirtschaft,text) VALUES ('$woche','$dax','$euro','$l1','$l2','$l3','$l4','$l5','$l6','$krieg','$wirtschaft','$text')");
 
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -590,7 +590,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         else
           echo "Fehler X100. Wenn diese Fehlermeldung erscheint ist irgendwas schief gelaufen.";
 
-      $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
+      $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE id = $f_id");
       $daten = mysql_fetch_array($abfrage_id);
       echo "<br><br>";
     }
@@ -731,7 +731,7 @@ else
   <h5>Normales Forum</h5>
   <table>
   <?
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch WHERE name = '$daten[prefix].$daten[nick]' ORDER BY datum DESC LIMIT 10");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch WHERE name = '$daten[prefix].$daten[nick]' ORDER BY datum DESC LIMIT 10");
     while($daten2 = mysql_fetch_array($abfrage_id))
     {
       echo "<form action=\"intern.php\" method=\"post\"><tr><td width=\"50%\">";
@@ -753,7 +753,7 @@ else
   <h5>KUEL-Forum</h5>
   <table>
   <?
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 WHERE name = '$daten[prefix].$daten[nick]' ORDER BY datum DESC LIMIT 10");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 WHERE name = '$daten[prefix].$daten[nick]' ORDER BY datum DESC LIMIT 10");
     while($daten2 = mysql_fetch_array($abfrage_id))
     {
       echo "<form action=\"intern.php\" method=\"post\"><tr><td width=\"50%\">";
@@ -783,7 +783,7 @@ else
   echo "Besucher bisher: $counterstand<br><br>";
 
 
-  $abfrage_id = mysql_query("SELECT id,datum,pagename,anzahl FROM stpageviews");
+  $abfrage_id = $mysqli->query("SELECT id,datum,pagename,anzahl FROM stpageviews");
   $i = 0;
   while($datenT = mysql_fetch_array($abfrage_id))
   {
@@ -807,7 +807,7 @@ else
   $minimized = 0;
   $no2 = 0;
 
-  $abfrage_id = mysql_query("SELECT id,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende FROM stspy ORDER BY dauer_ende DESC LIMIT 5000");
+  $abfrage_id = $mysqli->query("SELECT id,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende FROM stspy ORDER BY dauer_ende DESC LIMIT 5000");
   while($datenT = mysql_fetch_array($abfrage_id))
   {
     $gesamt++;
@@ -886,7 +886,7 @@ else
   {
     echo "<br>\n<h1>Admin-Funktionen</h1>";
     echo "Admin-Onkels sind zurzeit:<br>";
-    $abfrage_id = mysql_query("SELECT id,prefix,nick,typ FROM stmembers WHERE typ >= 2");
+    $abfrage_id = $mysqli->query("SELECT id,prefix,nick,typ FROM stmembers WHERE typ >= 2");
     while($datenT = mysql_fetch_array($abfrage_id))
     {
       echo "- $datenT[prefix].$datenT[nick]<br>";
@@ -895,7 +895,7 @@ else
     echo "<br><br><h3>VI. Alle Forenbeitr&auml;ge editieren (jeweils die letzten 10):</h3>";
 
     echo "<h5>Normales Forum</h5>";
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch ORDER BY datum DESC LIMIT 10");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch ORDER BY datum DESC LIMIT 10");
     echo "<table>";
       while($datenT = mysql_fetch_array($abfrage_id))
       {
@@ -916,7 +916,7 @@ else
     echo "</table>";
     
     echo "<h5>KUEL-Forum</h5>";
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC LIMIT 10");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC LIMIT 10");
     echo "<table>";
       while($datenT = mysql_fetch_array($abfrage_id))
       {
@@ -940,7 +940,7 @@ else
 
     echo "<br><br><h3>VII. Alle eingelieferten News editieren (die letzten 10):</h3>";
 
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag FROM stnews ORDER BY datum DESC LIMIT 10");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag FROM stnews ORDER BY datum DESC LIMIT 10");
 
     echo "<table>";
       while($datenT = mysql_fetch_array($abfrage_id))
@@ -960,7 +960,7 @@ else
 
 
   <?
-  $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0");
+  $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0");
   ?>
 
   <br><br>
@@ -1087,7 +1087,7 @@ else
   </form>
 
   <?
-  $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli,points FROM stmembers WHERE typ >= 0");
+  $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli,points FROM stmembers WHERE typ >= 0");
   ?>
   <br><br><br>
   <h3>X. Stammtischmitglieder beobachten:</h3>
@@ -1241,7 +1241,7 @@ else
     <tr align="left"><th>Platz</th><th>Nick</th><th>Bild</th><th>Points</th><th>+Points</th><th>&nbsp;</th></tr>
     <?
     $i = 0;
-    $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli,points FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY points DESC,Nick ASC");
+    $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli,points FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY points DESC,Nick ASC");
 
     echo "<form action=\"intern.php\" method=\"post\">";
     echo "<input type=\"hidden\" name=\"f_nick\" value=\"$f_nick\">";
@@ -1301,7 +1301,7 @@ else
   <? if (!isset($f_pw)): ?>
 
     <?
-    $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
+    $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
     ?>
 
     <form name="pw_abfrage" action="intern.php" method="post">
@@ -1329,14 +1329,14 @@ else
         $time_sub = time();
         $time_sub -= 600;
 
-        $loeschen_id = mysql_query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
+        $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
 
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 0");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 0");
 
         if ($daten_pw_ = mysql_fetch_array($abfrage_id))
         {
           $timex = time();
-          $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
+          $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "<br>Automatisches Einloggen erfolgt<br><br><br>";
           echo "\n<script>\n";

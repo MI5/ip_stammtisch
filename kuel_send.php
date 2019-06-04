@@ -34,7 +34,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
+$abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
 if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
 
@@ -45,22 +45,22 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
   $ip = getenv("REMOTE_ADDR");
   $browser = getenv("HTTP_USER_AGENT");
 
-  $abfrage_id = mysql_query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+  $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
   $daten_s = mysql_fetch_array($abfrage_id);
 
   if ($daten_s[user] == "")
-    $senden_id = mysql_query("UPDATE stspy SET user = '$daten[prefix].$daten[nick]' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten[prefix].$daten[nick]' WHERE ip = '$ip' AND browser = '$browser'");
 
 /* Spionage Ende */
 
 /* Spionage2 Anfang */
 
-  $abfrage_id = mysql_query("SELECT visits FROM stmembers WHERE id = '$daten[id]'");
+  $abfrage_id = $mysqli->query("SELECT visits FROM stmembers WHERE id = '$daten[id]'");
   $daten_s = mysql_fetch_array($abfrage_id);
 
   $anzahl = $daten_s[visits];
   $anzahl++;
-  $senden_id = mysql_query("UPDATE stmembers SET visits = '$anzahl' WHERE id = '$daten[id]'");
+  $senden_id = $mysqli->query("UPDATE stmembers SET visits = '$anzahl' WHERE id = '$daten[id]'");
 /* Spionage2 Ende */
 
 
@@ -69,11 +69,11 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
           $ip = getenv("REMOTE_ADDR");
           $timex = time();
 
-          $abfrage_id = mysql_query("SELECT id FROM stonline WHERE ip = '$ip'");
+          $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
           if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten[option_autoli] == 1))
           {
-            $senden_id = mysql_query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten[prefix]','$daten[nick]','$daten[pw]','$timex','$ip','$daten[typ]')");
+            $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten[prefix]','$daten[nick]','$daten[pw]','$timex','$ip','$daten[typ]')");
           }
 
           /* Login Ende 2*/
@@ -94,7 +94,7 @@ mail("ncc_1701@gmx.de", "KUEL", "$f_nick schreibt:\n$f_zug");
   <? if (!isset($f_pw)): ?>
 
     <?
-    $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY prefix DESC,nick");
+    $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY prefix DESC,nick");
     ?>
 
     <form name="pw_abfrage" action="kuel_send.php" method="post">
@@ -123,14 +123,14 @@ mail("ncc_1701@gmx.de", "KUEL", "$f_nick schreibt:\n$f_zug");
         $time_sub = time();
         $time_sub -= 600;
 
-        $loeschen_id = mysql_query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
+        $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
 
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 0");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 0");
 
         if ($daten_pw_ = mysql_fetch_array($abfrage_id))
         {
           $timex = time();
-          $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
+          $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "\n<script>\n";
           echo "  document.pw_abfrage.f_nick.value = \"$daten_pw_[nick]\";\n";

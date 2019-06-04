@@ -22,7 +22,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT id,datum,source,changedby FROM stsource WHERE id = 1");
+$abfrage_id = $mysqli->query("SELECT id,datum,source,changedby FROM stsource WHERE id = 1");
 $daten = mysql_fetch_array($abfrage_id);
 
 $d = (string) $daten[datum];

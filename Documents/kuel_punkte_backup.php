@@ -46,7 +46,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT id,prefix,nick,name,points FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY points DESC,Nick ASC");
+$abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,points FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY points DESC,Nick ASC");
 $i = 1;
 while($datenXX = mysql_fetch_array($abfrage_id))
 {

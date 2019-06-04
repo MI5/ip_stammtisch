@@ -35,13 +35,13 @@ $dauer_start = time();
 
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+$abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
 $daten = mysql_fetch_array($abfrage_id);
 
 if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
 {
-  $senden_id = mysql_query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start, besuchernr) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start','$counterstand')");
+  $senden_id = $mysqli->query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start, besuchernr) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start','$counterstand')");
 }
 
 $mysqli->close();

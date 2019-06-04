@@ -46,7 +46,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT prefix,nick,name,status,since,location,email,icq,option_icqshow FROM stmembers WHERE typ >= 1 ORDER BY nick");
+$abfrage_id = $mysqli->query("SELECT prefix,nick,name,status,since,location,email,icq,option_icqshow FROM stmembers WHERE typ >= 1 ORDER BY nick");
 
 while($daten = mysql_fetch_array($abfrage_id))
 {
@@ -108,7 +108,7 @@ Onkel.Darss<br>
 Onkel.Roland<br>
 
 <?
-$abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ = -1 ORDER BY datum");
+$abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ = -1 ORDER BY datum");
 
 while($daten = mysql_fetch_array($abfrage_id))
 {
@@ -120,7 +120,7 @@ while($daten = mysql_fetch_array($abfrage_id))
 <h4>Onkelanw&auml;rter <img src="bilder/smokin.gif"></h4>
 
 <?
-$abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ = 0 ORDER BY nick");
+$abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ = 0 ORDER BY nick");
 
 while($daten = mysql_fetch_array($abfrage_id))
 {

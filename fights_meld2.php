@@ -41,7 +41,7 @@ selectbg();
     }
 
 
-    $senden_id = mysql_query("INSERT INTO stfights (vs,map,modus,result,we,them) VALUES ('$f_vs','$f_map','$f_modus','$f_result','$f_x1','$f_x2')");
+    $senden_id = $mysqli->query("INSERT INTO stfights (vs,map,modus,result,we,them) VALUES ('$f_vs','$f_map','$f_modus','$f_result','$f_x1','$f_x2')");
     $mysqli->close();
     echo "Tabelle erfolgreich erg&auml;nzt!<br><br><a href=\"fights.php\">Fights</a>";
   }

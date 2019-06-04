@@ -7,28 +7,28 @@ $cookie_inhalt = getenv("HTTP_COOKIE");
 
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT cookie_inhalt FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+$abfrage_id = $mysqli->query("SELECT cookie_inhalt FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 $daten = mysql_fetch_array($abfrage_id);
 
 if ($cookie_inhalt != $daten[cookie_inhalt])
 {
 
-  $senden_id = mysql_query("UPDATE stspy SET cookie_inhalt = '$cookie_inhalt' WHERE ip = '$ip' AND browser = '$browser'");
+  $senden_id = $mysqli->query("UPDATE stspy SET cookie_inhalt = '$cookie_inhalt' WHERE ip = '$ip' AND browser = '$browser'");
 
 
 
-  $abfrage_id = mysql_query("SELECT tilesetcount FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+  $abfrage_id = $mysqli->query("SELECT tilesetcount FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
   $daten = mysql_fetch_array($abfrage_id);
 
   if (!isset($daten[tilesetcount]))
   {
-    $senden_id = mysql_query("UPDATE stspy SET tilesetcount = '1' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET tilesetcount = '1' WHERE ip = '$ip' AND browser = '$browser'");
   }
   else
   {
     $tilesetcount = $daten[tilesetcount];
     $tilesetcount++;
-    $senden_id = mysql_query("UPDATE stspy SET tilesetcount = '$tilesetcount' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET tilesetcount = '$tilesetcount' WHERE ip = '$ip' AND browser = '$browser'");
   }
 }
 

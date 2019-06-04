@@ -57,7 +57,7 @@ Jeder Spieler besitzt ein Symbol, mit welchem ihm gehörende Länder markiert we
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT prefix,nick,format FROM stmembers WHERE typ >= 1 && option_kuel = 1");
+$abfrage_id = $mysqli->query("SELECT prefix,nick,format FROM stmembers WHERE typ >= 1 && option_kuel = 1");
 while($datenXX = mysql_fetch_array($abfrage_id))
 {
   echo "<tr><td><img src=\"$datenXX[format]\"></td><td>$datenXX[prefix].$datenXX[nick]</td></tr>";

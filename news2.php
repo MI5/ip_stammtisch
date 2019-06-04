@@ -24,16 +24,16 @@ selectbg();
   {
     $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-    $senden_id = mysql_query("INSERT INTO stnews (name,topic,beitrag) VALUES ('$f_name','$f_topic','$f_beitrag')");
+    $senden_id = $mysqli->query("INSERT INTO stnews (name,topic,beitrag) VALUES ('$f_name','$f_topic','$f_beitrag')");
 
 
-    $abfrage_id = mysql_query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
+    $abfrage_id = $mysqli->query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
     while($datenXX = mysql_fetch_array($abfrage_id))
     {
       if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
         mail("$datenXX[wl]", "Neuigkeiten vom Stammtisch", "Neue News eingeliefert von $f_name:\n\n-- $f_topic --\n\n$f_beitrag\n\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
     }
-    $abfrage_id = mysql_query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
+    $abfrage_id = $mysqli->query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
     while($datenXX = mysql_fetch_array($abfrage_id))
     {
       if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX[option_notself] != 1))
@@ -45,7 +45,7 @@ selectbg();
     $browser = getenv("HTTP_USER_AGENT");
     $beitrag = "News: ".$f_topic;
 
-    $abfrage_id = mysql_query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+    $abfrage_id = $mysqli->query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
     $daten = mysql_fetch_array($abfrage_id);
 
@@ -57,7 +57,7 @@ selectbg();
         $beitrag = $daten[beitrag]."; ".$beitrag;
     }
 
-    $senden_id = mysql_query("UPDATE stspy SET user = '$f_name', beitrag = '$beitrag' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET user = '$f_name', beitrag = '$beitrag' WHERE ip = '$ip' AND browser = '$browser'");
 
     $mysqli->close();
     echo "News erfolgreich eingeliefert!<br><br><a href=\"center.php\">Home</a>";

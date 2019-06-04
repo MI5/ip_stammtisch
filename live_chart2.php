@@ -13,7 +13,7 @@ $no = 0;
 
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT id,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende FROM stspy ORDER BY dauer_ende DESC LIMIT 5000");
+$abfrage_id = $mysqli->query("SELECT id,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende FROM stspy ORDER BY dauer_ende DESC LIMIT 5000");
 while($datenT = mysql_fetch_array($abfrage_id))
 {
   if ($datenT[statusleiste] == "active")

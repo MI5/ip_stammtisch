@@ -23,7 +23,7 @@ selectbg();
 
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
-$abfrage_id = mysql_query("SELECT id,datum,we,them,result FROM stfights where id = '$id'");
+$abfrage_id = $mysqli->query("SELECT id,datum,we,them,result FROM stfights where id = '$id'");
 $daten = mysql_fetch_array($abfrage_id);
 
 $d = (string) $daten[datum];

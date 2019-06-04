@@ -49,7 +49,7 @@ Bisherige Clanfights
 
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
-$abfrage_id = mysql_query("SELECT id,vs,map,modus,result FROM stfights ORDER BY datum");
+$abfrage_id = $mysqli->query("SELECT id,vs,map,modus,result FROM stfights ORDER BY datum");
 
 $gesamt = 0;
 $siege = 0;

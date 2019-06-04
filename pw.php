@@ -24,7 +24,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT name,pw FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND wl = '$f_email'");
+$abfrage_id = $mysqli->query("SELECT name,pw FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND wl = '$f_email'");
 
 if (($daten = mysql_fetch_array($abfrage_id)) && ($f_email != ""))
 {
@@ -46,7 +46,7 @@ $mysqli->close();
 
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT prefix,nick,email FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
+$abfrage_id = $mysqli->query("SELECT prefix,nick,email FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
 
 echo "<form action=\"pw.php\" method=\"post\">Ich bin <select name=\"f_nick\">";
 while($daten = mysql_fetch_array($abfrage_id))

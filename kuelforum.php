@@ -23,16 +23,16 @@ $sprache = getenv("HTTP_ACCEPT_LANGUAGE");
 $http_status  = getenv("HTTP_CONNECTION");
 $dauer_start = time();
 
-$abfrage_id = mysql_query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+$abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
 $daten = mysql_fetch_array($abfrage_id);
 
 if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
 {
-  $senden_id = mysql_query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start')");
+  $senden_id = $mysqli->query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start')");
 }
 
-$abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC");
+$abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC");
 ?>
 
 
@@ -79,19 +79,19 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
   {
     if ($f_email == "")
       $f_email = "[none]";
-    $senden_id = mysql_query("INSERT INTO stammtisch2 (name,email,topic,beitrag,intern) VALUES ('$f_name','$f_email','$f_topic','$f_beitrag','$f_intern')");
+    $senden_id = $mysqli->query("INSERT INTO stammtisch2 (name,email,topic,beitrag,intern) VALUES ('$f_name','$f_email','$f_topic','$f_beitrag','$f_intern')");
 
 
 
     if ($f_intern == "1")
     {
-      $abfrage_id = mysql_query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
+      $abfrage_id = $mysqli->query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
       while($datenXX = mysql_fetch_array($abfrage_id))
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX['option_notself'] != 1))
           mail("$datenXX[wl]", "Neuigkeiten vom Stammtisch", "Neuer Forenbeitrag (Kuelforum) von $f_name:\n\nIntern: Ja\n\n-- $f_topic --\n\n$f_beitrag\n\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
       }
-      $abfrage_id = mysql_query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
+      $abfrage_id = $mysqli->query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
       while($datenXX = mysql_fetch_array($abfrage_id))
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX['option_notself'] != 1))
@@ -100,13 +100,13 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
     }
     else
     {
-      $abfrage_id = mysql_query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
+      $abfrage_id = $mysqli->query("SELECT prefix,nick,wl,option_notself FROM stmembers WHERE typ >= 0 && option_mailsend = 1");
       while($datenXX = mysql_fetch_array($abfrage_id))
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX['option_notself'] != 1))
           mail("$datenXX[wl]", "Neuigkeiten vom Stammtisch", "Neuer Forenbeitrag (Kuelforum) von $f_name:\n\n-- $f_topic --\n\n$f_beitrag\n\n\nhttp://www.der-stammtisch.net", "From: Web-Onkel MI5 <Onkel.MI5@der-stammtisch.net>");
       }
-      $abfrage_id = mysql_query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
+      $abfrage_id = $mysqli->query("SELECT prefix,nick,icq,option_notself FROM stmembers WHERE typ >= 0 && option_icqsend = 1");
       while($datenXX = mysql_fetch_array($abfrage_id))
       {
         if (($f_name != "$datenXX[prefix].$datenXX[nick]") || ($datenXX['option_notself'] != 1))
@@ -118,7 +118,7 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
     $browser = getenv("HTTP_USER_AGENT");
     $beitrag = "Forum: ".$f_topic;
 
-    $abfrage_id = mysql_query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+    $abfrage_id = $mysqli->query("SELECT user,beitrag FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
     $daten = mysql_fetch_array($abfrage_id);
 
@@ -130,10 +130,10 @@ if (isset($f_name) || isset($f_email) || isset($f_topic) || isset($f_intern) || 
         $beitrag = $daten['beitrag']."; ".$beitrag;
     }
 
-    $senden_id = mysql_query("UPDATE stspy SET user = '$f_name', beitrag = '$beitrag' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET user = '$f_name', beitrag = '$beitrag' WHERE ip = '$ip' AND browser = '$browser'");
 
 
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC");
 
     echo "Eintrag erfolgreich hinzugef&uuml;gt!<br><br><br>";
   }
@@ -160,7 +160,7 @@ if (isset($b))
     $ip = getenv("REMOTE_ADDR");
     $browser = getenv("HTTP_USER_AGENT");
 
-    $abfrage_id = mysql_query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+    $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
     $daten_user = mysql_fetch_array($abfrage_id);
 
     echo "  <td>Name:</td><td><input name=\"f_name\" value=\"$daten_user[user]\" size=\"30\" maxlength=\"30\"></td>";
@@ -194,14 +194,14 @@ if (isset($b))
   }
   else
   {
-    $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 WHERE id = $b");
+    $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 WHERE id = $b");
     $daten = mysql_fetch_array($abfrage_id);
 
     if ($daten['intern'] == 1)
     {
       if (!isset($f_pw))
       {
-        $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 ORDER BY prefix DESC,nick");
+        $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 ORDER BY prefix DESC,nick");
 
         ?>
         <form name="pw_abfrage" action="kuelforum.php?b=<? echo "$daten[id]"; ?>" method="post">
@@ -230,14 +230,14 @@ if (isset($b))
         $time_sub = time();
         $time_sub -= 600;
 
-        $loeschen_id = mysql_query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
+        $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
 
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 1");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 1");
 
         if ($daten_pw_ = mysql_fetch_array($abfrage_id))
         {
           $timex = time();
-          $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
+          $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "<br>Automatisches Einloggen erfolgt<br><br><br>";
           echo "\n<script>\n";
@@ -257,7 +257,7 @@ if (isset($b))
       }
       else
       {
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
         if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != ""))
         {
@@ -268,11 +268,11 @@ if (isset($b))
           $ip = getenv("REMOTE_ADDR");
           $browser = getenv("HTTP_USER_AGENT");
 
-          $abfrage_id = mysql_query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+          $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
           $daten_s = mysql_fetch_array($abfrage_id);
 
           if ($daten_s['user'] == "")
-            $senden_id = mysql_query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
+            $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
 
           /* Spionage Ende */
           /* Login Anfang 2 */
@@ -280,11 +280,11 @@ if (isset($b))
           $ip = getenv("REMOTE_ADDR");
           $timex = time();
 
-          $abfrage_id = mysql_query("SELECT id FROM stonline WHERE ip = '$ip'");
+          $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
           if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten_li[option_autoli] == 1))
           {
-            $senden_id = mysql_query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten_li[prefix]','$daten_li[nick]','$daten_li[pw]','$timex','$ip','$daten_li[typ]')");
+            $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten_li[prefix]','$daten_li[nick]','$daten_li[pw]','$timex','$ip','$daten_li[typ]')");
           }
 
           /* Login Ende 2*/
@@ -324,7 +324,7 @@ if (isset($b))
       echo " am $d[6]$d[7].$d[4]$d[5].$d[0]$d[1]$d[2]$d[3] um $d[8]$d[9]:$d[10]$d[11]";
       echo "</td></tr></table><br>";
 
-      $abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC");
+      $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC");
     }
   }
 }
@@ -350,7 +350,7 @@ if (isset($b))
 
 <table width="80%">
 <?
-$abfrage_id = mysql_query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC LIMIT 40");
+$abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch2 ORDER BY datum DESC LIMIT 40");
 while($daten = mysql_fetch_array($abfrage_id))
 {
   $style = "";

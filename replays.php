@@ -31,7 +31,7 @@ selectbg();
 
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
-$abfrage_id = mysql_query("SELECT id, datum, uploaded_by, name, size, beschreibung FROM streplays ORDER BY datum");
+$abfrage_id = $mysqli->query("SELECT id, datum, uploaded_by, name, size, beschreibung FROM streplays ORDER BY datum");
 $mysqli->close();
 
 

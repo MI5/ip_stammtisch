@@ -60,7 +60,7 @@ if (isset($aktion))
   if ($aktion == "aufrufe_l")
   {
 
-    /* $senden_id = mysql_query("UPDATE stpageviews SET anzahl = 0");
+    /* $senden_id = $mysqli->query("UPDATE stpageviews SET anzahl = 0");
     echo "Seitenaufrufe wurden zur&uuml;ckgesetzt"; */
 
     echo "Gesperrt!";
@@ -68,14 +68,14 @@ if (isset($aktion))
 
   if ($aktion == "ips_l")
   {
-    $abfrage_id = mysql_query("SELECT id,ip,datum FROM stspy ORDER BY dauer_ende DESC LIMIT 10,10000");
+    $abfrage_id = $mysqli->query("SELECT id,ip,datum FROM stspy ORDER BY dauer_ende DESC LIMIT 10,10000");
 
     while($daten = mysql_fetch_array($abfrage_id))
     {
       if (!stristr("$daten[ip]","x"))
       {
         $ip__ = "$daten[ip]x";
-        $senden_id = mysql_query("UPDATE stspy SET ip = '$ip__' where id = $daten[id]");
+        $senden_id = $mysqli->query("UPDATE stspy SET ip = '$ip__' where id = $daten[id]");
       }
     }
 
@@ -84,19 +84,19 @@ if (isset($aktion))
 
   if ($aktion == "eintrag_l")
   {
-    $loeschen_id = mysql_query("DELETE FROM stspy WHERE id = '$f_id'");
+    $loeschen_id = $mysqli->query("DELETE FROM stspy WHERE id = '$f_id'");
     echo "ID $f_id gelöscht!";
   }
 
   if ($aktion == "clipboard_l")
   {
-    $senden_id = mysql_query("UPDATE stspy SET clipboard = '[deleted]' WHERE id = '$f_id'");
+    $senden_id = $mysqli->query("UPDATE stspy SET clipboard = '[deleted]' WHERE id = '$f_id'");
     echo "Clipboard von ID $f_id geleert!";
   }
 
   if ($aktion == "user_l")
   {
-    $abfrage_id = mysql_query("SELECT user FROM stspy WHERE id = '$f_id'");
+    $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE id = '$f_id'");
     $datenT = mysql_fetch_array($abfrage_id);
 
     echo "<form action=\"internx.php?ident=$ident&sortby=$sortby&direction=$direction&mich=$mich&detail=$detail&rows=$rows\" method=\"post\">";
@@ -108,7 +108,7 @@ if (isset($aktion))
 
   if ($aktion == "user_l2")
   {
-    $senden_id = mysql_query("UPDATE stspy SET user = '$f_user' WHERE id = '$f_id'");
+    $senden_id = $mysqli->query("UPDATE stspy SET user = '$f_user' WHERE id = '$f_id'");
     echo "User von ID $f_id gesetzt!";
   }
 
@@ -301,11 +301,11 @@ if ($detail == "yes")
 
 <?
 if ($ident == "no")
-  $abfrage_id = mysql_query("SELECT id,ip,datum,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende,zuletzt,user,beitrag,count,tilesetcount,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,clipboard,besuchernr FROM stspy WHERE user = '' ORDER BY $sortby $direction LIMIT $rows");
+  $abfrage_id = $mysqli->query("SELECT id,ip,datum,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende,zuletzt,user,beitrag,count,tilesetcount,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,clipboard,besuchernr FROM stspy WHERE user = '' ORDER BY $sortby $direction LIMIT $rows");
 elseif ($ident =="yes")
-  $abfrage_id = mysql_query("SELECT id,ip,datum,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende,zuletzt,user,beitrag,count,tilesetcount,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,clipboard,besuchernr FROM stspy WHERE user <> '' ORDER BY $sortby $direction LIMIT $rows");
+  $abfrage_id = $mysqli->query("SELECT id,ip,datum,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende,zuletzt,user,beitrag,count,tilesetcount,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,clipboard,besuchernr FROM stspy WHERE user <> '' ORDER BY $sortby $direction LIMIT $rows");
 else
-  $abfrage_id = mysql_query("SELECT id,ip,datum,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende,zuletzt,user,beitrag,count,tilesetcount,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,clipboard,besuchernr FROM stspy ORDER BY $sortby $direction LIMIT $rows");
+  $abfrage_id = $mysqli->query("SELECT id,ip,datum,host,browser,cookie_inhalt,ursprung,statusleiste,dauer_start,dauer_ende,zuletzt,user,beitrag,count,tilesetcount,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,clipboard,besuchernr FROM stspy ORDER BY $sortby $direction LIMIT $rows");
 
 
 
@@ -596,7 +596,7 @@ else
 
 <?
 
-$abfrage_id = mysql_query("SELECT id,datum,pagename,anzahl FROM stpageviews");
+$abfrage_id = $mysqli->query("SELECT id,datum,pagename,anzahl FROM stpageviews");
 
 $i = 0;
 
@@ -611,7 +611,7 @@ while($daten = mysql_fetch_array($abfrage_id))
 }
 echo "Seitenaufrufe bisher: $i (ohne internx)<br><br>";
 
-$abfrage_id = mysql_query("SELECT id,datum,pagename,anzahl FROM stpageviews");
+$abfrage_id = $mysqli->query("SELECT id,datum,pagename,anzahl FROM stpageviews");
 ?>
 
 <table border="2" cellspacing="0" bgcolor=#000059>

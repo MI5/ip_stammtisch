@@ -36,7 +36,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-$abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
+$abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
 if (isset($f_name)): ?>
 
@@ -51,7 +51,7 @@ mail("ncc_1701@gmx.de", "1000. Besucher", "$f_name\n$f_strasse\n$f_ort\n\n$f_kom
 <? else: ?>
 
     <?
-    $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY prefix DESC,nick");
+    $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 && option_kuel = 1 ORDER BY prefix DESC,nick");
     ?>
     Sie sind der 1000. Besucher auf der Webseite des Stammtisches! Dies ist kein Scherz!
     Überprüfen sie in den <a href="stats.php" target="_blank">Stats</a>, dass sie tatsächlich der 1000. Besucher

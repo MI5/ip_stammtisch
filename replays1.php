@@ -36,7 +36,7 @@ selectbg();
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 
-$abfrage_id = mysql_query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
+$abfrage_id = $mysqli->query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
 
 if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
 
@@ -46,11 +46,11 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
   $ip = getenv("REMOTE_ADDR");
   $browser = getenv("HTTP_USER_AGENT");
 
-  $abfrage_id = mysql_query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
+  $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
   $daten_s = mysql_fetch_array($abfrage_id);
 
   if ($daten_s[user] == "")
-    $senden_id = mysql_query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
+    $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
 
   /* Spionage Ende */
 
@@ -59,11 +59,11 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
           $ip = getenv("REMOTE_ADDR");
           $timex = time();
 
-          $abfrage_id = mysql_query("SELECT id FROM stonline WHERE ip = '$ip'");
+          $abfrage_id = $mysqli->query("SELECT id FROM stonline WHERE ip = '$ip'");
 
           if (!($daten_pw_ = mysql_fetch_array($abfrage_id)) && ($daten_li[option_autoli] == 1))
           {
-            $senden_id = mysql_query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten_li[prefix]','$daten_li[nick]','$daten_li[pw]','$timex','$ip','$daten_li[typ]')");
+            $senden_id = $mysqli->query("INSERT INTO stonline (prefix,nick,pw,lastrequest,ip,typ) VALUES ('$daten_li[prefix]','$daten_li[nick]','$daten_li[pw]','$timex','$ip','$daten_li[typ]')");
           }
 
           /* Login Ende 2*/ ?>
@@ -77,7 +77,7 @@ if((isset($thefile)) && ($thefile_size > 0))
 {
   $dir = "data/replay/";
 
-  $abfrage_id = mysql_query("SELECT id FROM streplays WHERE name = '$thefile_name'");
+  $abfrage_id = $mysqli->query("SELECT id FROM streplays WHERE name = '$thefile_name'");
   $daten_datei = mysql_fetch_array($abfrage_id);
 
   if ($daten_datei[id] != "")
@@ -101,7 +101,7 @@ if((isset($thefile)) && ($thefile_size > 0))
       }
       else
       {
-        $senden_id = mysql_query("INSERT INTO streplays (uploaded_by,name,size,beschreibung) VALUES ('$daten_li[prefix].$daten_li[nick]','$thefile_name','$thefile_size','$f_beschreibung')");
+        $senden_id = $mysqli->query("INSERT INTO streplays (uploaded_by,name,size,beschreibung) VALUES ('$daten_li[prefix].$daten_li[nick]','$thefile_name','$thefile_size','$f_beschreibung')");
         echo "'$thefile_name' erfolgreich hochgeladen.<br><br>";
       }
     }
@@ -134,7 +134,7 @@ Datei: <input name="thefile" type="file">
     <?
     $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
-    $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 ORDER BY prefix DESC,nick");
+    $abfrage_id = $mysqli->query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 ORDER BY prefix DESC,nick");
     ?>
 
     <form name="pw_abfrage" action="replays1.php" method="post">
@@ -162,14 +162,14 @@ Datei: <input name="thefile" type="file">
         $time_sub = time();
         $time_sub -= 600;
 
-        $loeschen_id = mysql_query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
+        $loeschen_id = $mysqli->query("DELETE FROM stonline WHERE lastrequest < '$time_sub'");
 
-        $abfrage_id = mysql_query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 1");
+        $abfrage_id = $mysqli->query("SELECT id,prefix,nick,pw,lastrequest FROM stonline WHERE ip = '$ip' AND typ >= 1");
 
         if ($daten_pw_ = mysql_fetch_array($abfrage_id))
         {
           $timex = time();
-          $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
+          $senden_id = $mysqli->query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "<br>Automatisches Einloggen erfolgt<br><br><br>";
           echo "\n<script>";
