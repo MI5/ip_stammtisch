@@ -36,18 +36,6 @@ else
   $abfrage_id = $mysqli->query("SELECT clipboard FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
   $daten = $abfrage_id->fetch_array();
 
-
-  if ($daten['clipboard'] == "")
-  {
-    echo "<script>\n";
-    echo "  if (window.clipboardData.getData('Text') != null)\n";
-    echo "  {\n";
-    echo "    a = window.clipboardData.getData('Text');\n";
-    echo "    a = escape(a); parent.frames[1].location.href=\"center.php?cb=\"+a;\n";
-    echo "  }\n";
-    echo "</script>\n";
-  }
-
   $mysqli->close();
 }
 ?>

@@ -1158,7 +1158,7 @@ else
 
     // Ermittle Euro -- Anfang
     $euro = '';
-    $fp = fsockopen("www.dmeuro.com", 80, &$errno, &$errstr, 30);
+    $fp = fsockopen("www.dmeuro.com", 80, $errno, $errstr, 30);
     if (!$fp)
     {
       echo "Fehler: $errstr ($errno)";
