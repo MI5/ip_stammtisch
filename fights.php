@@ -56,7 +56,7 @@ $siege = 0;
 while($daten = $abfrage_id->fetch_array())
 {
   $gesamt++;
-  if ($daten[result] == "Sieg")
+  if ($daten['result'] == "Sieg")
     $siege++;
   echo "<tr><td>$daten[vs]</td><td>$daten[map]</td><td>$daten[modus]</td><td>$daten[result]</td><td><a href=\"javascript:details('details.php?id=$daten[id]')\">Details</a></td></tr>";
 }
