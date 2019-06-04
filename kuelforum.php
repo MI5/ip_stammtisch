@@ -396,5 +396,5 @@ while($daten = mysql_fetch_array($abfrage_id))
 </html>
 
 <?
-mysql_close($link);
+$mysqli->close();
 ?>

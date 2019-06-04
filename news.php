@@ -69,7 +69,7 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
           /* Login Ende 2*/
 
 
-mysql_close($link); ?>
+$mysqli->close(); ?>
 
 <div align="left">
 Du bist gerade dabei eine News einzuliefern. Dieses Recht ist im allgemeinen dem Ober-, Web-
@@ -159,7 +159,7 @@ Ansonsten nutzt diese in der War2-Community wohl einmalige M&ouml;glichkeit einf
         /* Login Ende 1 */ ?>
 
     <?
-    mysql_close($link);
+    $mysqli->close();
     ?>
 
   <? else: ?>

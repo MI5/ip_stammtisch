@@ -80,5 +80,5 @@ echo "$daten[text]";
 </body>
 </html>
 <?
-mysql_close($link);
+$mysqli->close();
 ?>

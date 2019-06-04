@@ -51,5 +51,5 @@ else
   $senden_id = mysql_query("UPDATE stspy SET count = '$count' WHERE ip = '$ip' AND browser = '$browser'");
 }
 
-mysql_close($link);
+$mysqli->close();
 ?>

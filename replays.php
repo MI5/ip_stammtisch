@@ -32,7 +32,7 @@ selectbg();
 <?
 $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = mysql_query("SELECT id, datum, uploaded_by, name, size, beschreibung FROM streplays ORDER BY datum");
-mysql_close($link);
+$mysqli->close();
 
 
 while($daten = mysql_fetch_array($abfrage_id))

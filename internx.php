@@ -655,5 +655,5 @@ Mich so aufzurufen ist nicht m&ouml;glich.
 </html>
 
 <?
-  mysql_close($link);
+  $mysqli->close();
 ?>

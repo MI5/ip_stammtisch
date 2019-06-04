@@ -53,7 +53,7 @@ while($datenXX = mysql_fetch_array($abfrage_id))
   echo "<tr><td>$i</td><td>$datenXX[prefix].$datenXX[nick]</td><td><a href=\"javascript:open__window('$datenXX[id]')\">show</a></td><td>$datenXX[points]</td></tr>";
   $i++;
 }
-mysql_close($link);
+$mysqli->close();
 ?>
 </table>
 

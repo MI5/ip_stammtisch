@@ -35,7 +35,7 @@ while($datenT = mysql_fetch_array($abfrage_id))
   else
     {$andere++;}
 }
-mysql_close($link);
+$mysqli->close();
 
 $data = array($ie,$ns,$mozilla,$opera,$andere);
 

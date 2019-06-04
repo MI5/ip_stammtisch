@@ -21,5 +21,5 @@ else
   $senden_id = mysql_query("UPDATE stpageviews SET anzahl = '$anzahl' WHERE pagename = '$pagename'");
 }
 
-mysql_close($link);
+$mysqli->close();
 ?>

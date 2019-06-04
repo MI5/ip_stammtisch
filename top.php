@@ -33,7 +33,7 @@ if ($cookie_inhalt != $daten[cookie_inhalt])
 }
 
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 <html>

@@ -127,7 +127,7 @@ while($daten = mysql_fetch_array($abfrage_id))
   echo "$daten[prefix].$daten[nick]<br>";
 }
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 </font>

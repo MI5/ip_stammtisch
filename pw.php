@@ -36,7 +36,7 @@ else
   echo "Identifikation nicht erfolgreich!";
 }
 
-mysql_close($link);
+$mysqli->close();
 
 
 /* <br><br><br><a href="intern.php">Zur&uuml;ck</a> */ ?>
@@ -56,7 +56,7 @@ while($daten = mysql_fetch_array($abfrage_id))
 echo "</select><br><br>Zur Identifikation gib deine Weiterleitungs-eMail-Adresse an: <input name=\"f_email\" size=\"30\" maxlength=\"30\">";
 echo "<br><br><input type=\"submit\" value=\"Passwort Anfordern\"></form>";
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 <? endif ?>

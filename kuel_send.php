@@ -159,7 +159,7 @@ mail("ncc_1701@gmx.de", "KUEL", "$f_nick schreibt:\n$f_zug");
 <? endif ?>
 
 
-<? mysql_close($link); ?>
+<? $mysqli->close(); ?>
 
 
 </div>

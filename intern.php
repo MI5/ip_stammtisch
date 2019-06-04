@@ -1361,7 +1361,7 @@ else
 <? endif ?>
 
 
-<? mysql_close($link); ?>
+<? $mysqli->close(); ?>
 
 
 </div>

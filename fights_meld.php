@@ -68,7 +68,7 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):?>
 
           /* Login Ende 2*/
 
-mysql_close($link); ?>
+$mysqli->close(); ?>
 
 <div align="left">
 Es fehlt ein Eintrag? &Auml;ndere doch einfach den <a href ="changesrc.php?key=allowed434">Quellcode</a> ab!
@@ -111,7 +111,7 @@ $daten = mysql_fetch_array($abfrage_id);
 
 echo "$daten[source]";
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 
@@ -185,7 +185,7 @@ mysql_close($link);
         /* Login Ende 1 */ ?>
 
     <?
-    mysql_close($link);
+    $mysqli->close();
     ?>
 
   <? else: ?>

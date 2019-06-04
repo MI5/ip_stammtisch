@@ -8,7 +8,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $senden_id = mysql_query("UPDATE stspy SET statusleiste = 'minimized' WHERE ip = '$ip' AND browser = '$browser'");
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 <html>

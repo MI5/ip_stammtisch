@@ -59,7 +59,7 @@ selectbg();
 
     $senden_id = mysql_query("UPDATE stspy SET user = '$f_name', beitrag = '$beitrag' WHERE ip = '$ip' AND browser = '$browser'");
 
-    mysql_close($link);
+    $mysqli->close();
     echo "News erfolgreich eingeliefert!<br><br><a href=\"center.php\">Home</a>";
   }
   else

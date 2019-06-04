@@ -121,7 +121,7 @@ Datei: <input name="thefile" type="file">
 </form>
 <br><br>Verwende bitte einen möglichst aussagekräftigen Dateinamen und Beschreibungstext.
 
-<? mysql_close($link); ?>
+<? $mysqli->close(); ?>
 
 
 
@@ -187,7 +187,7 @@ Datei: <input name="thefile" type="file">
         /* Login Ende 1 */ ?>
 
     <?
-    mysql_close($link);
+    $mysqli->close();
     ?>
 
   <? else: ?>

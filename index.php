@@ -44,7 +44,7 @@ if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
   $senden_id = mysql_query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start, besuchernr) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start','$counterstand')");
 }
 
-mysql_close($link);
+$mysqli->close();
 
 ?>
 

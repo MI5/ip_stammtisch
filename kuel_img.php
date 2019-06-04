@@ -38,7 +38,7 @@ if (isset($id))
     echo "</font>";
   }
 
-  mysql_close($link);
+  $mysqli->close();
 }
 else
 {

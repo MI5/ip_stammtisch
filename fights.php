@@ -75,7 +75,7 @@ if (stristr("$browser","MSIE"))
   echo "Der Technik kann man heutzutage ja nicht mehr trauen.";
 } */
 
-mysql_close($link);
+$mysqli->close();
 ?>
 <br><br>
 <a href="fights_meld.php">Meldung machen</a>

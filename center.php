@@ -24,7 +24,7 @@ if (isset($cb))
   echo "  parent.frames[1].location.href=\"center.php\";";
   echo "</script>";
 
-  mysql_close($link);
+  $mysqli->close();
 }
 else
 {
@@ -48,7 +48,7 @@ else
     echo "</script>\n";
   }
 
-  mysql_close($link);
+  $mysqli->close();
 }
 ?>
 
@@ -86,7 +86,7 @@ if (($dauer_start - $daten['dauer_ende'] - 7200) > 0)
   $senden_id = mysql_query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start')");
 }
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
@@ -155,7 +155,7 @@ while($daten = mysql_fetch_array($abfrage_id))
   echo "<font size=\"-2\">Eingeliefert von $daten[name] am $d[8]$d[9].$d[5]$d[6].$d[0]$d[1]$d[2]$d[3]</font><hr noshade>";
 }
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 </td></tr>

@@ -62,7 +62,7 @@ while($datenXX = mysql_fetch_array($abfrage_id))
 {
   echo "<tr><td><img src=\"$datenXX[format]\"></td><td>$datenXX[prefix].$datenXX[nick]</td></tr>";
 }
-mysql_close($link);
+$mysqli->close();
 ?>
 <!--
 <tr><td><img src="bilder/k_becks.gif" width="57" height="90"></td><td>Onkel.Becks</td></tr>

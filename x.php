@@ -65,7 +65,7 @@ if (($daten_li = mysql_fetch_array($abfrage_id)) && ($f_pw != "")):
 
           /* Login Ende 2*/
 
-mysql_close($link); ?>
+$mysqli->close(); ?>
 
 
 <div align="left">
@@ -134,7 +134,7 @@ Benutzen sie folgenden Link um ihr Ziel zu erreichen:<br>
         /* Login Ende 1 */ ?>
 
     <?
-    mysql_close($link);
+    $mysqli->close();
     ?>
 
   <? else: ?>

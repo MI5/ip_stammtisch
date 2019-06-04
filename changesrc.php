@@ -32,7 +32,7 @@ echo "<textarea name=\"f_source\" rows=\"25\" cols=\"90\" wrap=\"physical\">$dat
 echo "<div align=\"left\"><br>Ge&auml;ndert von: <input name=\"f_name\" size=\"30\" maxlength=\"30\"></div><br><br>";
 echo "<input type=\"reset\" value=\"Zur&uuml;cksetzen\"><input type=\"submit\" value=\"&Auml;ndern\"></form>";
 
-mysql_close($link);
+$mysqli->close();
 ?>
 
 <? else: ?>

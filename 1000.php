@@ -87,7 +87,7 @@ mail("ncc_1701@gmx.de", "1000. Besucher", "$f_name\n$f_strasse\n$f_ort\n\n$f_kom
 <? endif ?>
 
 
-<? mysql_close($link); ?>
+<? $mysqli->close(); ?>
 
 
 </div>

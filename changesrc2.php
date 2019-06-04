@@ -47,7 +47,7 @@ selectbg();
 
     $senden_id = mysql_query("UPDATE stspy SET user = '$f_name', beitrag = '$beitrag' WHERE ip = '$ip' AND browser = '$browser'");
 
-    mysql_close($link);
+    $mysqli->close();
     echo "Quellcode erfolgreich ge&auml;ndert!<br><br><a href=\"fights_meld.php?pw=critterblasen\">Fight melden</a>";
   }
   else

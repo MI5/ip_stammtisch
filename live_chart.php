@@ -29,7 +29,7 @@ while($datenT = mysql_fetch_array($abfrage_id))
     {$no++;}
 }
 
-mysql_close($link);
+$mysqli->close();
 $data = array($wueste,$brachland,$winter,$sommer,$no);
 
 // Create the Pie Graph.

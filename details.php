@@ -29,7 +29,7 @@ $daten = mysql_fetch_array($abfrage_id);
 $d = (string) $daten[datum];
 echo "<b>Austragungsdatum:</b> $d[6]$d[7].$d[4]$d[5].$d[2]$d[3]<br><br>";
 echo "<b>Unsere beteiligten Leute:</b><br>$daten[we]<br><br><b>Die Gegner:</b><br>$daten[them]<br><br>";
-mysql_close($link);
+$mysqli->close();
 ?>
 
 

@@ -23,7 +23,7 @@ while($datenT = mysql_fetch_array($abfrage_id))
   elseif ($datenT[statusleiste] == "minimized")
     {$minimized++;}
 }
-mysql_close($link);
+$mysqli->close();
 
 $data = array($minimized,$closed,$active);
 
