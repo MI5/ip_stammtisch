@@ -1,0 +1,16 @@
+a:link		{ color:#FFFF33; text-decoration:none; }
+a:active	{ color:#000000; text-decoration:none; }
+a:visited	{ color:#FFFF33; text-decoration:none; }
+
+
+body,td		{
+		font-family:Verdana, Heletica, Arial, MS Sans Serif; font-size:11pt;
+		}
+
+pre		{
+		font-family:Courier; font-size:11pt;
+		}
+
+body		{
+		margin: 10px 10px;
+		}

@@ -1,0 +1,92 @@
+<!--
+   Einträge können hier editiert werden. Bei den Multiple-Einträgen ist unbedingt darauf
+   zu achten, das sowohl 'value' als auch der tatsächliche Eintrag abgeändert wird.
+   'Value' und Eintrag müssen dabei gleich sein.
+   Es MUSS in jeder Kategorie einen Eintrag mit 'selected' geben. Bitte darauf achten.
+   Danke, Web-Onkel MI5
+//-->
+
+<!-- Ab hier 'gegn. Clan' ändern -->
+
+<select name="f_vs" size="5">
+    <option selected>TestClan</option>
+    <option>AZ</option>
+    <option>BHC</option>
+    <option>BP</option>
+    <option>CWG</option>
+    <option>CWU</option>
+    <option>C42</option>
+    <option>DOW</option>
+    <option>GBC</option>
+    <option>MD</option>
+    <option>ST</option>
+    <option>OB</option>
+    <option>OLC</option>
+    <option>WP</option>
+    <option>WW</option>
+</select>
+</td><td>
+
+<!-- Ab hier 'gegn. Beteiligte' ändern (multiple!) -->
+
+<select name="f_them[]" multiple size="5">
+    <option selected value="eXitus[BP]">eXitus[BP]</option>
+    <option value="killer[BP]">killer[BP]</option>
+    <option value="Gegn1">Gegn1</option>
+    <option value="Gegn2">Gegn2</option>
+    <option value="Gegn3">Gegn3</option>
+    <option value="Gegn4">Gegn4</option>
+</select>
+</td><td>
+
+<!-- Ab hier 'Map' ändern -->
+
+<select name="f_map" size="5">
+    <option selected> Garden of war</option>
+    <option>Garden of war BNE</option>
+    <option>Fierce ocean combat</option>
+    <option>Fierce ocean combat BNE</option>
+    <option>High seas combat</option>
+    <option>High seas combat BNE</option>
+    <option>Plains of snow</option>
+    <option>Plains of snow BNE</option>
+    <option>A continent to explore</option>
+    <option>All You Need BNE</option>
+    <option>Arctic Circle BNE</option>
+    <option>Gold Separates East & West</option>
+    <option>Great White North BNE</option>
+    <option>Instant Action BNE</option>
+    <option>Mud in Your Eye BNE</option>
+    <option>No way out of this maze</option>
+    <option>Nowhere to run or hide</option>
+    <option>Oil is the key</option>
+    <option>Schwartzwald BNE</option>
+    <option>Taiga BNE</option>
+    <option>The spiral</option>
+    <option>The spiral BNE</option>
+    <option>World Domination BNE</option>
+</select>
+</td><td>
+
+<!-- Ab hier 'Modus' ändern -->
+
+<select name="f_modus" size="5">
+    <option>1vs1</option>
+    <option>2vs2</option>
+    <option selected>3vs3</option>
+    <option>4vs4</option>
+    <option>FFA</option>
+    <option>2vs3</option>
+    <option>2vs4</option>
+    <option>3vs4</option>
+    <option>3vs5</option>
+</select>
+</td><td valign="top">
+
+<!-- Ab hier 'Ausgang' ändern -->
+
+<select name="f_result" size="3">
+    <option selected>Sieg</option>
+    <option>Verlust</option>
+    <option>Remis</option>
+</select>
