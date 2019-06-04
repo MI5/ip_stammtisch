@@ -317,59 +317,59 @@ while($daten = $abfrage_id->fetch_array())
       continue;
   }
 
-  if ($daten[user] == "")
-    $daten[user] = "&nbsp;";
-  if ($daten[beitrag] == "")
-    $daten[beitrag] = "&nbsp;";
-  if ($daten[host] == "")
-    $daten[host] = "&nbsp;";
-  if ($daten[cookie_inhalt] == "")
-    $daten[cookie_inhalt] = "&nbsp;";
-  if ($daten[statusleiste] == "")
-    $daten[statusleiste] = "&nbsp;";
-  if ($daten[count] == "")
-    $daten[count] = "&nbsp;";
-  if ($daten[tilesetcount] == "")
-    $daten[tilesetcount] = "&nbsp;";
-  if ($daten[zuletzt] == "")
-    $daten[zuletzt] = "&nbsp;";
-  if ($daten[pre1_zuletzt] == "")
-    $daten[pre1_zuletzt] = "&nbsp;";
-  if ($daten[pre2_zuletzt] == "")
-    $daten[pre2_zuletzt] = "&nbsp;";
-  if ($daten[pre3_zuletzt] == "")
-    $daten[pre3_zuletzt] = "&nbsp;";
-  if ($daten[pre4_zuletzt] == "")
-    $daten[pre4_zuletzt] = "&nbsp;";
-  if ($daten[pre5_zuletzt] == "")
-    $daten[pre5_zuletzt] = "&nbsp;";
-  if ($daten[pre6_zuletzt] == "")
-    $daten[pre6_zuletzt] = "&nbsp;";
-  if ($daten[pre7_zuletzt] == "")
-    $daten[pre7_zuletzt] = "&nbsp;";
-  if ($daten[pre8_zuletzt] == "")
-    $daten[pre8_zuletzt] = "&nbsp;";
-  if ($daten[pre9_zuletzt] == "")
-    $daten[pre9_zuletzt] = "&nbsp;";
-  if ($daten[ursprung] == "")
-    $daten[ursprung] = "&nbsp;";
-  if ($daten[clipboard] == "")
-    $daten[clipboard] = "&nbsp;";
-  if ($daten[browser] == "")
-    $daten[browser] = "&nbsp;";
-  if ($daten[besuchernr] == "")
-    $daten[besuchernr] = "&nbsp;";
+  if ($daten['user'] == "")
+    $daten['user'] = "&nbsp;";
+  if ($daten['beitrag'] == "")
+    $daten['beitrag'] = "&nbsp;";
+  if ($daten['host'] == "")
+    $daten['host'] = "&nbsp;";
+  if ($daten['cookie_inhalt'] == "")
+    $daten['cookie_inhalt'] = "&nbsp;";
+  if ($daten['statusleiste'] == "")
+    $daten['statusleiste'] = "&nbsp;";
+  if ($daten['count'] == "")
+    $daten['count'] = "&nbsp;";
+  if ($daten['tilesetcount'] == "")
+    $daten['tilesetcount'] = "&nbsp;";
+  if ($daten['zuletzt'] == "")
+    $daten['zuletzt'] = "&nbsp;";
+  if ($daten['pre1_zuletzt'] == "")
+    $daten['pre1_zuletzt'] = "&nbsp;";
+  if ($daten['pre2_zuletzt'] == "")
+    $daten['pre2_zuletzt'] = "&nbsp;";
+  if ($daten['pre3_zuletzt'] == "")
+    $daten['pre3_zuletzt'] = "&nbsp;";
+  if ($daten['pre4_zuletzt'] == "")
+    $daten['pre4_zuletzt'] = "&nbsp;";
+  if ($daten['pre5_zuletzt'] == "")
+    $daten['pre5_zuletzt'] = "&nbsp;";
+  if ($daten['pre6_zuletzt'] == "")
+    $daten['pre6_zuletzt'] = "&nbsp;";
+  if ($daten['pre7_zuletzt'] == "")
+    $daten['pre7_zuletzt'] = "&nbsp;";
+  if ($daten['pre8_zuletzt'] == "")
+    $daten['pre8_zuletzt'] = "&nbsp;";
+  if ($daten['pre9_zuletzt'] == "")
+    $daten['pre9_zuletzt'] = "&nbsp;";
+  if ($daten['ursprung'] == "")
+    $daten['ursprung'] = "&nbsp;";
+  if ($daten['clipboard'] == "")
+    $daten['clipboard'] = "&nbsp;";
+  if ($daten['browser'] == "")
+    $daten['browser'] = "&nbsp;";
+  if ($daten['besuchernr'] == "")
+    $daten['besuchernr'] = "&nbsp;";
 
 
-  if ($mich == "yes" && $ip==$daten[ip] && $browser==$daten[browser])
+  if ($mich == "yes" && $ip==$daten['ip'] && $browser==$daten['browser'])
   {
     {echo "<tr bgcolor=#990033>";}
   }
   else
   {
-    if (time()-$daten[dauer_ende] < 300)
+    if (time()-$daten['dauer_ende'] < 300)
       {echo "<tr bgcolor=#FF0000>";}
-    elseif (time()-$daten[dauer_ende] < 1800)
+    elseif (time()-$daten['dauer_ende'] < 1800)
       {echo "<tr bgcolor=#FF5500>";}
     else
       {echo "<tr>";}
@@ -386,7 +386,7 @@ while($daten = $abfrage_id->fetch_array())
     echo "  <td>$daten[beitrag]</td>\n";
 
 
-  //Provider
+  // Provider
   if (stristr("$daten[host]","t-dialin"))
     {echo "<td>T-Online</td>";}
   elseif (stristr("$daten[host]",".t-ipconnect.de"))
@@ -440,7 +440,7 @@ while($daten = $abfrage_id->fetch_array())
   else
     {echo "<td>$daten[host]</td>";}
 
-  //OS
+  // OS
   if (stristr("$daten[browser]","Win95; I"))
     {echo "<td>Win&nbsp;ME</td>";}
   elseif (stristr("$daten[browser]","Win95") || stristr("$daten[browser]","Windows 95"))
@@ -533,7 +533,7 @@ while($daten = $abfrage_id->fetch_array())
   echo "  <td>$daten[tilesetcount]</td>\n";
 
 
-  //Cookie
+  // Cookie
   if ($daten['cookie_inhalt'] == "0")
     {echo "<td>Sommer</td>";}
   elseif ($daten['cookie_inhalt'] == "1")
@@ -625,7 +625,7 @@ $abfrage_id = $mysqli->query("SELECT id,datum,pagename,anzahl FROM stpageviews")
 <?
 while($daten = $abfrage_id->fetch_array())
 {
-  $d = (string) $daten[datum];
+  $d = (string) $daten['datum'];
   echo "<tr>";
   echo "  <td>$daten[pagename]</td>\n";
   echo "  <td>$daten[anzahl]</td>\n";

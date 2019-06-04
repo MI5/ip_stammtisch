@@ -37,7 +37,7 @@ else
   $daten = $abfrage_id->fetch_array();
 
 
-  if ($daten[clipboard] == "")
+  if ($daten['clipboard'] == "")
   {
     echo "<script>\n";
     echo "  if (window.clipboardData.getData('Text') != null)\n";

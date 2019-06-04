@@ -10,13 +10,13 @@ $abfrage_id = $mysqli->query("SELECT anzahl FROM stpageviews WHERE pagename = '$
 $daten = $abfrage_id->fetch_array();
 
 
-if (!isset($daten[anzahl]))
+if (!isset($daten['anzahl']))
 {
   $senden_id = $mysqli->query("INSERT INTO stpageviews (pagename,anzahl) VALUES ('$pagename','1')");
 }
 else
 {
-  $anzahl = $daten[anzahl];
+  $anzahl = $daten['anzahl'];
   $anzahl++;
   $senden_id = $mysqli->query("UPDATE stpageviews SET anzahl = '$anzahl' WHERE pagename = '$pagename'");
 }
