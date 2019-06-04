@@ -1258,7 +1258,7 @@ else
       echo "<input type=\"hidden\" name=\"f_id_user[]\" value=\"$datenT[id]\">";
       echo "<input type=\"hidden\" name=\"f_oldPoints[]\" value=\"$datenT[points]\">";
       echo "<td align=\"right\">+&nbsp;<input name=\"f_newPoints[]\" value=\"0\" maxlength=\"6\" size=\"3\" onFocus=\"this.select()\"></td>";
-      if (mysql_num_rows($abfrage_id) == $i)
+      if ($abfrage_id->num_rows == $i)
         echo "<td><input type=\"submit\" value=\"Punkte addieren - Schritt 2\"></td>";
       else
         echo "<td>&nbsp;</td>";
