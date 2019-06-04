@@ -787,9 +787,9 @@ else
   $i = 0;
   while($datenT = $abfrage_id->fetch_array())
   {
-    if ($datenT[pagename] != "/internx.php")
+    if ($datenT['pagename'] != "/internx.php")
     {
-      $i += $datenT[anzahl];
+      $i += $datenT['anzahl'];
     }
   }
   echo "Seitenaufrufe bisher: $i<br><br>";
@@ -1130,7 +1130,7 @@ else
     <?
     // Ermittle Dax -- Anfang
     $dax = '';
-    $fp = fsockopen("kurse.exchange.de", 80, &$errno, &$errstr, 30);
+    $fp = fsockopen("kurse.exchange.de", 80, $errno, $errstr, 30);
     if (!$fp)
     {
       echo "Fehler: $errstr ($errno)";

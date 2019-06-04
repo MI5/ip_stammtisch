@@ -147,9 +147,9 @@ $abfrage_id = $mysqli->query("SELECT name,topic,datum,beitrag FROM stnews ORDER 
 
 while($daten = $abfrage_id->fetch_array())
 {
-  $d = (string) $daten[datum];
+  $d = (string) $daten['datum'];
 
-  $beitragx = $daten[beitrag];
+  $beitragx = $daten['beitrag'];
   $beitragx = preg_replace("/(\015\012)|(\015)|(\012)/","<br>",$beitragx);
   echo "<font size=\"+1\"><b>$daten[topic]</b></font><br>$beitragx<br><br>";
   echo "<font size=\"-2\">Eingeliefert von $daten[name] am $d[8]$d[9].$d[5]$d[6].$d[0]$d[1]$d[2]$d[3]</font><hr noshade>";

@@ -25,7 +25,7 @@ $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = $mysqli->query("SELECT id,datum,source,changedby FROM stsource WHERE id = 1");
 $daten = $abfrage_id->fetch_array();
 
-$d = (string) $daten[datum];
+$d = (string) $daten['datum'];
 echo "fights.php - Zuletzt ge&auml;ndert von $daten[changedby] am $d[6]$d[7].$d[4]$d[5].$d[0]$d[1]$d[2]$d[3] um $d[8]$d[9]:$d[10]$d[11] Uhr<br>";
 echo "<form action=\"changesrc2.php\" method=\"post\">";
 echo "<textarea name=\"f_source\" rows=\"25\" cols=\"90\" wrap=\"physical\">$daten[source]</textarea><br><br>";

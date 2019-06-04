@@ -37,7 +37,7 @@ $mysqli->close();
 
 while($daten = $abfrage_id->fetch_array())
 {
-  $d = $daten[datum];
+  $d = $daten['datum'];
   echo "<table border=\"2\" cellspacing=\"0\" width=\"50%\">";
   echo "<tr><td width=\"60%\"><a href=\"data/replay/$daten[name]\" target=\"_blank\">$daten[name]</a></td><td>Größe: ".round($daten[size]/1024)." KB</td></tr>\n";
   echo "<tr><td colspan=\"2\">$daten[beschreibung]<br><br><font size=\"-2\">Hochgeladen von $daten[uploaded_by] am $d[6]$d[7].$d[4]$d[5].$d[2]$d[3]</font></tr>";
