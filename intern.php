@@ -40,8 +40,7 @@ selectbg();
 <div align="center">
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 
 $abfrage_id = mysql_query("SELECT id,prefix,nick,name,status,since,location,pw,email,wl,format,icq,typ,option_icqshow,option_icqsend,option_mailsend,option_notself,visits,option_kuel,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
@@ -1195,8 +1194,7 @@ else
     if (!$fp)
     {
       echo "Fehler: $errstr ($errno)";
-      $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-      mysql_select_db($sql_db);
+      $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
     }
     else
     {

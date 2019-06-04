@@ -4,8 +4,7 @@ include("vars.inc.php");
 include("pageviews.inc");
 include("spy.inc");
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 ?>
 
 <html>

@@ -6,8 +6,7 @@ $browser = getenv("HTTP_USER_AGENT");
 $dauer_ende = time();
 
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT zuletzt,pre1_zuletzt,pre2_zuletzt,pre3_zuletzt,pre4_zuletzt,pre5_zuletzt,pre6_zuletzt,pre7_zuletzt,pre8_zuletzt,pre9_zuletzt,pre10_zuletzt,pre11_zuletzt,pre12_zuletzt,pre13_zuletzt,pre14_zuletzt,pre15_zuletzt,pre16_zuletzt,pre17_zuletzt,pre18_zuletzt FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 $daten = mysql_fetch_array($abfrage_id);

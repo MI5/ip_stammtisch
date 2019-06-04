@@ -48,8 +48,7 @@ Bisherige Clanfights
 </tr>
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = mysql_query("SELECT id,vs,map,modus,result FROM stfights ORDER BY datum");
 
 $gesamt = 0;

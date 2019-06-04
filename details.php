@@ -22,8 +22,7 @@ selectbg();
 
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = mysql_query("SELECT id,datum,we,them,result FROM stfights where id = '$id'");
 $daten = mysql_fetch_array($abfrage_id);
 

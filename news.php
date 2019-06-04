@@ -32,8 +32,7 @@ selectbg();
 <div align="center">
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 
 $abfrage_id = mysql_query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
@@ -105,8 +104,7 @@ Ansonsten nutzt diese in der War2-Community wohl einmalige M&ouml;glichkeit einf
   <? if (!isset($f_pw)): ?>
 
     <?
-    $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-    mysql_select_db($sql_db);
+    $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
     $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 ORDER BY prefix DESC,nick");
     ?>

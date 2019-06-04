@@ -22,8 +22,7 @@ selectbg();
 <?
   if ($f_name != "" && $f_source != "")
   {
-    $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-    mysql_select_db($sql_db);
+    $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
     $senden_id = mysql_query("UPDATE stsource SET source = '$f_source', changedby = '$f_name' WHERE id = 1");
 

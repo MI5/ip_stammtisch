@@ -22,8 +22,7 @@ selectbg();
 <?
   if ($f_we != "" && $f_vs != "" && $f_them != "" && $f_map != "" && $f_modus != "" && $f_result != "")
   {
-    $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-    mysql_select_db($sql_db);
+    $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
     $count = count($f_we);
     $f_x1 = "$f_we[0]";

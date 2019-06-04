@@ -22,8 +22,7 @@ selectbg();
 <?
   if ($f_name != "" && $f_topic != "" && $f_beitrag != "")
   {
-    $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-    mysql_select_db($sql_db);
+    $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
     $senden_id = mysql_query("INSERT INTO stnews (name,topic,beitrag) VALUES ('$f_name','$f_topic','$f_beitrag')");
 

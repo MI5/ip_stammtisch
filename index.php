@@ -33,8 +33,7 @@ $sprache = getenv("HTTP_ACCEPT_LANGUAGE");
 $http_status  = getenv("HTTP_CONNECTION");
 $dauer_start = time();
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 

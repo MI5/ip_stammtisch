@@ -5,8 +5,7 @@ $ip = getenv("REMOTE_ADDR");
 $browser = getenv("HTTP_USER_AGENT");
 $cookie_inhalt = getenv("HTTP_COOKIE");
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT cookie_inhalt FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 $daten = mysql_fetch_array($abfrage_id);

@@ -20,8 +20,7 @@ selectbg();
 <? if ($key == "allowed434"): ?>
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT id,datum,source,changedby FROM stsource WHERE id = 1");
 $daten = mysql_fetch_array($abfrage_id);

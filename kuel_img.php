@@ -20,8 +20,7 @@ selectbg();
 <?
 if (isset($id))
 {
-  $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-  mysql_select_db($sql_db);
+  $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
   $abfrage_id = mysql_query("SELECT prefix,nick,format FROM stmembers WHERE id = '$id'");
   $datenXX = mysql_fetch_array($abfrage_id);

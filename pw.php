@@ -22,8 +22,7 @@ selectbg();
 
 <? if (isset($f_nick) && isset($f_email)): ?>
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT name,pw FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND wl = '$f_email'");
 
@@ -45,8 +44,7 @@ mysql_close($link);
 
 <?
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT prefix,nick,email FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
 

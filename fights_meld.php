@@ -33,8 +33,7 @@ selectbg();
 <div align="center">
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 
 $abfrage_id = mysql_query("SELECT id,prefix,nick,name,pw,typ,option_autoli FROM stmembers WHERE typ >= 0 AND nick = '$f_nick' AND pw = '$f_pw'");
@@ -82,8 +81,7 @@ Es fehlt ein Eintrag? &Auml;ndere doch einfach den <a href ="changesrc.php?key=a
 
 
 <?
-  $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-  mysql_select_db($sql_db);
+  $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
   $abfrage_id = mysql_query("SELECT id,prefix,nick FROM stmembers WHERE typ >= 0 ORDER BY prefix DESC,nick");
 ?>
@@ -106,8 +104,7 @@ Es fehlt ein Eintrag? &Auml;ndere doch einfach den <a href ="changesrc.php?key=a
 
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT id,datum,source,changedby FROM stsource WHERE id = 1");
 $daten = mysql_fetch_array($abfrage_id);
@@ -133,8 +130,7 @@ mysql_close($link);
   <? if (!isset($f_pw)): ?>
 
     <?
-    $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-    mysql_select_db($sql_db);
+    $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
     $abfrage_id = mysql_query("SELECT prefix,nick FROM stmembers WHERE typ >= 1 ORDER BY prefix DESC,nick");
     ?>

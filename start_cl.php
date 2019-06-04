@@ -4,8 +4,7 @@ include("vars.inc.php");
 $ip = getenv("REMOTE_ADDR");
 $browser = getenv("HTTP_USER_AGENT");
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $senden_id = mysql_query("UPDATE stspy SET statusleiste = 'closed' WHERE ip = '$ip' AND browser = '$browser'");
 

@@ -44,8 +44,7 @@ selectbg();
 <tr align="left"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr>
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT prefix,nick,name,status,since,location,email,icq,option_icqshow FROM stmembers WHERE typ >= 1 ORDER BY nick");
 

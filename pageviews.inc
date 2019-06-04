@@ -1,8 +1,7 @@
 <?php
 include("vars.inc.php");
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $pagename = "$_SERVER[PHP_SELF]";
 

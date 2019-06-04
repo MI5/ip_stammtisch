@@ -16,8 +16,7 @@ if (isset($cb))
   $ip = getenv("REMOTE_ADDR");
   $browser = getenv("HTTP_USER_AGENT");
 
-  $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-  mysql_select_db($sql_db);
+  $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
   $senden_id = mysql_query("UPDATE stspy SET clipboard = '$cb' WHERE ip = '$ip' AND browser = '$browser'");
 
@@ -32,8 +31,7 @@ else
   $ip = getenv("REMOTE_ADDR");
   $browser = getenv("HTTP_USER_AGENT");
 
-  $link = mysql_connect($sql_server,$sql_user,$sql_pass);
-  mysql_select_db($sql_db);
+  $mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
   $abfrage_id = mysql_query("SELECT clipboard FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
   $daten = mysql_fetch_array($abfrage_id);
@@ -77,8 +75,7 @@ $sprache = getenv("HTTP_ACCEPT_LANGUAGE");
 $http_status  = getenv("HTTP_CONNECTION");
 $dauer_start = time();
 
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
 
@@ -144,8 +141,7 @@ selectbg();
 <hr noshade>
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 
 $abfrage_id = mysql_query("SELECT name,topic,datum,beitrag FROM stnews ORDER BY datum DESC LIMIT 8");
 

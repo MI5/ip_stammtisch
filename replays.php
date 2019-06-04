@@ -30,8 +30,7 @@ selectbg();
 <h2>Replays</h2>
 
 <?
-$link = mysql_connect($sql_server,$sql_user,$sql_pass);
-mysql_select_db($sql_db);
+$mysqli = new mysqli($sql_server,$sql_user,$sql_pass,$sql_db);
 $abfrage_id = mysql_query("SELECT id, datum, uploaded_by, name, size, beschreibung FROM streplays ORDER BY datum");
 mysql_close($link);
 
