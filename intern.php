@@ -1190,7 +1190,7 @@ else
     <?
     // Ermittle Lottozahlen -- Anfang
     $lotto = '';
-    $fp = fsockopen("www.lotto.de", 80, &$errno, &$errstr, 10);
+    $fp = fsockopen("www.lotto.de", 80, $errno, $errstr, 10);
     if (!$fp)
     {
       echo "Fehler: $errstr ($errno)";
