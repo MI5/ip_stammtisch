@@ -9,9 +9,9 @@ include("spy.inc");
 <head>
 <title>Replay einliefern</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -22,13 +22,13 @@ switch (document.cookie)
   case "3": document.writeln('<style type="text/css">td { color:#0000FF }</style>');
   break;
 }
-//--></script>
+</script>
 
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 <div align="center">
 
@@ -174,11 +174,11 @@ Datei: <input name="thefile" type="file">
           $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "<br>Automatisches Einloggen erfolgt<br><br><br>";
-          echo "\n<script language=\"JavaScript\"><!--\n";
+          echo "\n<script>";
           echo "  document.pw_abfrage.f_nick.value = \"$daten_pw_[nick]\";\n";
           echo "  document.pw_abfrage.f_pw.value = \"$daten_pw_[pw]\";\n";
           echo "  document.pw_abfrage.submit();\n";
-          echo "//--></script>\n";
+          echo "</script>\n";
         }
         else
         {

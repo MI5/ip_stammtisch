@@ -10,9 +10,9 @@ include("spy.inc");
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
 <title>Der KUEL-Punktestand</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -28,13 +28,13 @@ function open__window(id)
 {
   Fenster = open("kuel_img.php?id="+id+"&expl=no","Fenster","width=150,height=150,screenX=20,screenY=20");
 }
-//--></script>
+</script>
 
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 
 <div align="center">

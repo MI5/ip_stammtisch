@@ -8,9 +8,9 @@ include("spy.inc");
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -21,13 +21,13 @@ switch (document.cookie)
   case "3": document.writeln('<style type="text/css">td { color:#0000FF }</style>');
   break;
 }
-//--></script>
+</script>
 
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 <div align="center">
 
@@ -146,11 +146,11 @@ Ansonsten nutzt diese in der War2-Community wohl einmalige M&ouml;glichkeit einf
           $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "<br>Automatisches Einloggen erfolgt<br><br><br>";
-          echo "\n<script language=\"JavaScript\"><!--\n";
+          echo "\n<script>\n";
           echo "  document.pw_abfrage.f_nick.value = \"$daten_pw_[nick]\";\n";
           echo "  document.pw_abfrage.f_pw.value = \"$daten_pw_[pw]\";\n";
           echo "  document.pw_abfrage.submit();\n";
-          echo "//--></script>\n";
+          echo "</script>\n";
         }
         else
         {

@@ -10,9 +10,9 @@ include("spy.inc");
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
 <title>Die Kuel-regeln</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -23,13 +23,13 @@ switch (document.cookie)
   case "3": document.writeln('<style type="text/css">td,th,ol { color:#0000FF }</style>');
   break;
 }
-//--></script>
+</script>
 
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 
 <div align="center">

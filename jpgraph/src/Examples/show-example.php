@@ -3,13 +3,11 @@
 <html>
 <head>
 <title> Test suite for JpGraph - <?php echo $target; ?></title>
-<script type="text/javascript" language="javascript">
-<!--
+<script>
 function resize()
 {
 	return true;
 }
-//-->
 </script>
 </head>
 <frameset rows="*,*" onLoad="resize()">

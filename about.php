@@ -8,12 +8,12 @@ include("spy.inc");
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 
 <div align="center">

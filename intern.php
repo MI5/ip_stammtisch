@@ -8,10 +8,10 @@ include("spy.inc");
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 <title>Intern</title>
 
-<script language="JavaScript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -22,20 +22,20 @@ switch (document.cookie)
   case "3": document.writeln('<style type="text/css">td,th { color:#0000FF }</style>');
   break;
 }
-//--></script>
+</script>
 
-<script language="JavaScript"><!--
+<script>
 function open__window(id)
 {
   Fenster = open("kuel_img.php?id="+id,"Fenster","width=250,height=250,screenX=20,screenY=20");
 }
-//--></script>
+</script>
 
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 <div align="center">
 
@@ -89,7 +89,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
           /* Login Ende 2*/
 ?>
 
-  <script language="JavaScript"><!--
+  <script>
   function ch(Zahl)
   {
     if (document.forms["einst"].f_option_icqsend.checked == false && document.forms["einst"].f_option_mailsend.checked == false)
@@ -101,11 +101,11 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
       document.forms["einst"].f_option_notself.disabled = false;
     }
   }
-  //--></script>
+  </script>
 
   <div align="left">
 
-  <? //Wurde etwas aktualisiert?
+  <? // Wurde etwas aktualisiert?
     echo "<font color=\"#FF0000\"><b>";
 
     if (($f_action == "F1") && isset($f_prefix) && isset($f_icq) && isset($f_email) && isset($f_wl) && isset($f_id))
@@ -273,7 +273,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
           echo "<img src=\"bilder/schluessel.gif\" width=\"15\" height=\"7\">&nbsp;";
         echo "\"$daten3[topic]\" von $daten3[name]:";
 
-        echo "\n<script language=\"JavaScript\"><!--\n";
+        echo "\n<script>\n";
         echo "function click(Zahl)\n";
         echo "{\n";
         echo "  if (document.forms[0].f_beitrag.value == \"\")\n";
@@ -285,7 +285,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         echo "{\n";
         echo "  document.forms[0].b1.value = \"Änderungen übernehmen\"\n";
         echo "}\n";
-        echo "//--></script>\n";
+        echo "</script>\n";
 
 
         echo "</b></font>";
@@ -315,7 +315,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         echo "&Auml;ndern des Forenbeitrags ";
         echo "\"$daten3[topic]\" von $daten3[name]:";
 
-        echo "\n<script language=\"JavaScript\"><!--\n";
+        echo "\n<script>\n";
         echo "function click(Zahl)\n";
         echo "{\n";
         echo "  if (document.forms[0].f_beitrag.value == \"\")\n";
@@ -327,7 +327,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         echo "{\n";
         echo "  document.forms[0].b1.value = \"Änderungen übernehmen\"\n";
         echo "}\n";
-        echo "//--></script>\n";
+        echo "</script>\n";
 
 
         echo "</b></font>";
@@ -356,7 +356,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         $daten3 = mysql_fetch_array($abfrage_id);
         echo "&Auml;ndern der News \"$daten3[topic]\" von $daten3[name]:";
 
-        echo "\n<script language=\"JavaScript\"><!--\n";
+        echo "\n<script>\n";
         echo "function click(Zahl)\n";
         echo "{\n";
         echo "  if (document.forms[0].f_beitrag.value == \"\")\n";
@@ -368,8 +368,7 @@ if (($daten = mysql_fetch_array($abfrage_id)) && ($f_pw != "")): ?>
         echo "{\n";
         echo "  document.forms[0].b1.value = \"Änderungen übernehmen\"\n";
         echo "}\n";
-        echo "//--></script>\n";
-
+        echo "</script>\n";
 
         echo "<form action=\"intern.php\" method=\"post\">";
         echo "Verfasser: <input name=\"f_name\" size=\"30\" maxlength=\"60\" value=\"$daten3[name]\"><br>";
@@ -1342,11 +1341,11 @@ else
           $senden_id = mysql_query("UPDATE stonline SET lastrequest = '$timex' WHERE id = '$daten_pw_[id]'");
 
           echo "<br>Automatisches Einloggen erfolgt<br><br><br>";
-          echo "\n<script language=\"JavaScript\"><!--\n";
+          echo "\n<script>\n";
           echo "  document.pw_abfrage.f_nick.value = \"$daten_pw_[nick]\";\n";
           echo "  document.pw_abfrage.f_pw.value = \"$daten_pw_[pw]\";\n";
           echo "  document.pw_abfrage.submit();\n";
-          echo "//--></script>\n";
+          echo "</script>\n";
         }
         else
         {

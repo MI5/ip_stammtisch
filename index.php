@@ -52,10 +52,8 @@ mysql_close($link);
 <?
 if ($counterstand == 1000)
 {
-  echo "\n<script language=\"JavaScript\">\n";
-  echo "<!--\n";
+  echo "\n<script>\n";
   echo "  Fenster = open(\"1000.php\",\"Gewinn\",\"width=600,height=500,scrollbars=yes,status=yes,screenX=20,screenY=20\");\n";
-  echo "//-->\n";
   echo "</script>\n";
 }
 ?>
@@ -65,15 +63,13 @@ include("pageviews.inc");
 include("spy.inc");
 ?>
 
-<script language="JavaScript" type="text/javascript">
-<!--
+<script>
   if (!document.cookie)
   {
     var expdate = new Date();
     expdate.setTime(expdate.getTime()+(60*24*60*60*1000));
     document.cookie = escape(0) + "; expires="+expdate.toGMTString();
   }
-//-->
 </script>
 
 <META NAME="allow-search" content="YES">

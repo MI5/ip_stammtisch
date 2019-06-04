@@ -7,11 +7,11 @@ include("spy.inc");
 <head>
 <head><title>Der Pr&auml;sidenten-Onkel</title></head>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 <h2>Der Pr&auml;sidenten-Onkel</h2>
 

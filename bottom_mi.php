@@ -6,13 +6,11 @@ body		{
 		margin: -10px -10px;
 		}
 </style>
-<script language="JavaScript">
-<!--
+<script>
 function maxi()
 {
     top.location.href = "start.php?center="+parent.frames[1].document.URL;
 }
-//-->
 </script>
 </head>
 <body onClick="maxi()" bgcolor="#AAAAAA">

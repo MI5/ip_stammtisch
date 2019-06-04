@@ -12,12 +12,12 @@ include("spy.inc");
 <meta name="ProgId" content="FrontPage.Editor.Document">
 <title>Trickse</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 
 <div align="center">

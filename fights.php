@@ -8,9 +8,9 @@ include("spy.inc");
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -21,20 +21,19 @@ switch (document.cookie)
   case "3": document.writeln('<style type="text/css">td { color:#0000FF }</style>');
   break;
 }
-//--></script>
+</script>
 
-<script language="JavaScript"><!--
-
+<script>
 function details(seite)
 {
   Fenster = open(seite,"Fenster","width=280,height=330,screenX=20,screenY=20");
 }
-//--></script>
+</script>
 </head>
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 <div align="center">
 

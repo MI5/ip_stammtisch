@@ -1,9 +1,8 @@
 <html>
 <head>
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript">
-<!--
+<script>
 var z = document.cookie;
 
 function neueFramesLaden()
@@ -41,14 +40,13 @@ function exit()
 {
   top.location.href = "start_cl.php?center="+parent.frames[1].document.URL;
 }
-//-->
 </script>
 
 
 </head>
 <body bgcolor="#AAAAAA">
 
-<script language="JavaScript">
+<script>
 <!--
 if (document.cookie)
 {

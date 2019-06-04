@@ -21,10 +21,8 @@ if (isset($cb))
 
   $senden_id = mysql_query("UPDATE stspy SET clipboard = '$cb' WHERE ip = '$ip' AND browser = '$browser'");
 
-  echo "<script language=\"JavaScript\" type=\"text/javascript\">";
-  echo "<!--";
+  echo "<script>";
   echo "  parent.frames[1].location.href=\"center.php\";";
-  echo "//-->";
   echo "</script>";
 
   mysql_close($link);
@@ -43,14 +41,12 @@ else
 
   if ($daten[clipboard] == "")
   {
-    echo "<script language=\"JavaScript\" type=\"text/javascript\">\n";
-    echo "<!--\n";
+    echo "<script>\n";
     echo "  if (window.clipboardData.getData('Text') != null)\n";
     echo "  {\n";
     echo "    a = window.clipboardData.getData('Text');\n";
     echo "    a = escape(a); parent.frames[1].location.href=\"center.php?cb=\"+a;\n";
     echo "  }\n";
-    echo "//-->\n";
     echo "</script>\n";
   }
 
@@ -99,11 +95,10 @@ mysql_close($link);
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
 <title>News</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
 
-<script language="JavaScript" type="text/javascript">
-<!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -114,15 +109,12 @@ switch (document.cookie)
   case "3": document.writeln('<style type="text/css">td,li,ul { color:#0000FF } </style>');
   break;
 }
-//-->
 </script>
 
 </head>
 
-<script language="JavaScript" type="text/javascript">
-<!--
+<script>
 selectbg();
-//-->
 </script>
 <noscript>
 <body background="bg_sommer.gif"><font color="#FFFFFF">
@@ -178,7 +170,7 @@ mysql_close($link);
 <font size="-1"><a href="stats.php">Stats</a></font>
 <br><br><br>
 
-<script language="JavaScript" type="text/javascript"><!--
+<script>
 switch (document.cookie)
 {
   case "0":
@@ -189,7 +181,7 @@ switch (document.cookie)
   case "3": document.writeln('<font color="#0000FF">');
   break;
 }
-//--></script>
+</script>
 <noscript>
 <font color="#FFFFFF">
 </noscript>

@@ -41,11 +41,9 @@ mysql_close($link);
 <head>
 <title>Der Stammtisch</title>
 
-<script language="JavaScript" src="scripte.js" type="text/javascript"></script>
+<script src="scripte.js"></script>
 
-<script language="JavaScript">
-<!--
-
+<script>
 var pfade = new Array("home","ueberuns","members","joinus","forum","kuel","fights","replays","trickse","shop","intern");
 var landscape = "s";
 
@@ -71,14 +69,13 @@ function wechsel(nr)
   if(pfad.substr(pfad.length-5,1) == 1) version = 2; else version = 1;
   document.images[nr].src = "bilder/" + landscape + "_" + pfade[nr] + version + ".gif";
 }
-//-->
 </script>
 </head>
 
 
-<script language="JavaScript"><!--
+<script>
 selectbg();
-//--></script>
+</script>
 <noscript><body background="bg_sommer.gif"><font color="#FFFFFF"></noscript>
 
 <BGSOUND SRC="#" ID="beep" AUTOSTART="TRUE">
@@ -100,8 +97,7 @@ selectbg();
 </noscript>
 
 <!-- onMouseOver="document.all.beep.src=\'sheep.wav\'" -->
-<script language="JavaScript">
-<!--
+<script>
 switch(landscape)
 {
   case "s":
@@ -161,7 +157,6 @@ document.writeln('<a href="intern.php" target="center" onMouseOver="wechsel(10)"
   break;
 }
 
-//-->
 </script>
 
 

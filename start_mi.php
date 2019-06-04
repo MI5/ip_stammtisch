@@ -7,8 +7,6 @@ $browser = getenv("HTTP_USER_AGENT");
 $link = mysql_connect($sql_server,$sql_user,$sql_pass);
 mysql_select_db($sql_db);
 
-/* echo "<script language=\"JavaScript\"> { alert(\" $cookie_inhalt xx $ip xx $browser \"); } </script>"; */
-
 $senden_id = mysql_query("UPDATE stspy SET statusleiste = 'minimized' WHERE ip = '$ip' AND browser = '$browser'");
 
 mysql_close($link);
