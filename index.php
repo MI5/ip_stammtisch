@@ -39,7 +39,7 @@ $abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND 
 
 $daten = $abfrage_id->fetch_array();
 
-if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
+if (($dauer_start - $daten['dauer_ende'] - 7200) > 0)
 {
   $senden_id = $mysqli->query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start, besuchernr) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start','$counterstand')");
 }

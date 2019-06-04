@@ -27,7 +27,7 @@ $abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND 
 
 $daten = $abfrage_id->fetch_array();
 
-if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
+if (($dauer_start - $daten['dauer_ende'] - 7200) > 0)
 {
   $senden_id = $mysqli->query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start')");
 }
@@ -301,9 +301,9 @@ if (isset($b))
 
     if ($pw == "critterblasen")
     {
-      $d = (string) $daten[datum];
+      $d = (string) $daten['datum'];
 
-      if ($daten[intern] == 1)
+      if ($daten['intern'] == 1)
         echo "<table width=\"70%\"><tr><td><b><img src=\"bilder/schluessel.gif\" width=\"15\" height=\"7\"> $daten[topic]</b></td></tr></table>";
       else
         echo "<table width=\"70%\"><tr><td><b>$daten[topic]</b></td></tr></table>";
@@ -317,7 +317,7 @@ if (isset($b))
 
       echo "<tr><td>$beitragx";
       echo "<br><br><br>Verfasst von ";
-      if ($daten[email] == "[none]")
+      if ($daten['email'] == "[none]")
         {echo "$daten[name]";}
       else
         {echo "<a href=\"mailto:$daten[email]\">$daten[name]</a>";}

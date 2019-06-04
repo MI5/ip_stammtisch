@@ -27,7 +27,7 @@ $abfrage_id = $mysqli->query("SELECT dauer_ende FROM stspy WHERE ip = '$ip' AND 
 
 $daten = $abfrage_id->fetch_array();
 
-if (($dauer_start - $daten[dauer_ende] - 7200) > 0)
+if (($dauer_start - $daten['dauer_ende'] - 7200) > 0)
 {
   $senden_id = $mysqli->query("INSERT INTO stspy (ip, host, port, browser, cookie_inhalt, evtl_id, ursprung, adresszeile, erweiterte_url, variablen, accept, zeichensatz, sprache, http_status, dauer_start) VALUES ('$ip', '$host', '$port', '$browser', '$cookie_inhalt', '$evtl_id', '$ursprung', '$adresszeile','$erweiterte_url', '$variablen', '$accept', '$zeichensatz', '$sprache', '$http_status','$dauer_start')");
 }
@@ -198,7 +198,7 @@ if (isset($b))
     $abfrage_id = $mysqli->query("SELECT id,name,topic,datum,beitrag,email,intern FROM stammtisch WHERE id = $b");
     $daten = $abfrage_id->fetch_array();
 
-    if ($daten[intern] == 1)
+    if ($daten['intern'] == 1)
     {
       if (!isset($f_pw))
       {
@@ -272,7 +272,7 @@ if (isset($b))
           $abfrage_id = $mysqli->query("SELECT user FROM stspy WHERE ip = '$ip' AND browser = '$browser'");
           $daten_s = $abfrage_id->fetch_array();
 
-          if ($daten_s[user] == "")
+          if ($daten_s['user'] == "")
             $senden_id = $mysqli->query("UPDATE stspy SET user = '$daten_li[prefix].$daten_li[nick]' WHERE ip = '$ip' AND browser = '$browser'");
 
           /* Spionage Ende */

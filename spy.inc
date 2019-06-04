@@ -30,7 +30,7 @@ $pre5_zuletzt = $daten['pre4_zuletzt'];
 $pre4_zuletzt = $daten['pre3_zuletzt'];
 $pre3_zuletzt = $daten['pre2_zuletzt'];
 $pre2_zuletzt = $daten['pre1_zuletzt'];
-$pre1_zuletzt = $daten['zuletzt];
+$pre1_zuletzt = $daten['zuletzt'];
 $zuletzt = "$_SERVER[PHP_SELF]";
 
 

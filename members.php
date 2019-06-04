@@ -55,7 +55,7 @@ while($daten = $abfrage_id->fetch_array())
   echo "</td><td>$daten[name]</td>";
   echo "<td><a href=\"javascript:erklaerung('";
 
-  switch ($daten[status])
+  switch ($daten['status'])
   {
     case "Web-Onkel":
       echo "webonkel.php','350";
@@ -82,7 +82,7 @@ while($daten = $abfrage_id->fetch_array())
   }
   echo "')\">$daten[status]</a></td>";
   echo "<td>$daten[since]</td><td>$daten[location]</td>";
-  if ($daten[option_icqshow] == 1)
+  if ($daten['option_icqshow'] == 1)
     echo "<td><font size=\"1\">$daten[icq]</font></td>";
   else
     echo "<td><font size=\"1\">N/A</font></td>";
